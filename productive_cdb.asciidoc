@@ -3,12 +3,33 @@ by Viktor Gamov
 
 === ExtJS MVC Application Scaffolding ===
 
-In this article I'm going to tell you how can use open-source Eclipse Plug-in called Clear Data Builder to be more productive and do more with less while you are developing Enterprise Web applications with ExtJS and Java on the back end.
-Here is a small agenda of first part of article. First, I want to explain what is a Clear Data Builder and how and where you can get it. How to install and start using it. Next I will show you how you can create an ExtJS application for Java project. 
+In this article I'm going to tell you how can use open-source Eclipse Plug-in called Clear Data Builder to be more productive. You will see how to do more with less while you are developing Enterprise Web applications with ExtJS and Java back end.
+First, I want to explain what is a Clear Data Builder and how and where you can get it. How to install and start using it. Next I will show you how you can create an ExtJS application for Java project. 
 This ExtJS MVS application will contain all directory structure recommended by  MVC Architecture from Sencha's Website and I'll show you how you can run your application on Tomcat. 
-For this you will need Eclipse and you can get latest ??? version of Clear Tool Kit from Eclipse update site. This is the link. Link will be available as a part of show-notes. So, we see that right now major version is 1.1.4. you can always check what is the current available version from this link. Ok. So, once you install it. Let me show that I have it installed in my Eclipse. Here I have Clear Data Builder. And if you see this name over here inside Installed Software in your Eclipse you may sure that you can actually start doing application development. 
-So, let me start with the creation of the new project. I'll say New and Other and select here Clear and click Next. And Clear Data Builder supports. First of all Clear Data Builder  is the set of project templates for Enterprise Web Development and on the Java side there is a bunch of different frameworks to support persistence or to support for example dependency injection in this case as Spring. And There is a bunch  of popular framework. you can use these templates to start the project, but in this case  I would like to start a new project  ?? and will show you what is default structure. First of all let me call it episode_1_intro. So, there are different ways how you can link ExtJS framework to this application. In my case I already have installed ExtJS libraries as a part of ??? I actually installed it on the my Web Server on the Tomcat. So I can use this local URL, but also you can just specify any folder in your machine and Clear Data Builder automatically copy file inside your project and also you can use the CDN from the Sencha. If you don't want to store these libraries inside your project you can use CDN from Sencha. In this screencast I don't want to use any frameworks, I don't want to use MyBatis or Hibernate, nothing and I don't want to have Spring integration. Ok, so let me click Finish. And as you might see here, first of all you will see output of initial setup of Clear Data Builder. Basically here  Clear Data Builder runs first time and it initializes directory structure and it this case let me show you ???? in the WebContent we have directory structure which is the recommended structure for MVC applications by Sencha. We have directory for application also we have here the HTML wrapper for this application and we will see link to entry of our application. Also by default Clear Data Builder generates empty project with one sample controller and one automatically created viewport. So, in this case let me run this application. And I'll use the Tomcat ?? and remove and add this project??? into Tomcat. And let me add here intro demo and let me start Tomcat. Ok, our application is up and running. 
-Let me switch to web browser to open this application on local host  8080  and name of my project episode_1_intro. Boom! Just in couple minutes we got new project with the ExtJS framework and one fancy button. In this case we can see that our application is up and running. 
+For this you will need Eclipse and you can get latest ??? version of Clear Tool Kit from Eclipse update site. 
+
+This is the link. Link will be available as a part of show-notes. So, we see that right now major version is 1.1.4. you can always check what is the current available version from this link. Ok. So, once you install it. Let me show that I have it installed in my Eclipse. Here I have Clear Data Builder. 
+
+And if you see this name over here inside Installed Software in your Eclipse you may sure that you can actually start doing application development. 
+
+[[FIG_1]]
+.Check Clear Data Builder installation
+image:fig_01.png[image]
+
+Let me start with the creation of the new project. I'll say New and Other and select here Clear and click Next. Clear Data Builder comes with set of prepared examples that demonstrates integration with popular Java frameworks - MyBatis, Hibernate, Spring. Also, plain Java project example available as well. Let's create New project for scratch.
+
+[[FIG_2]]
+.New CDB Project Wizard
+image:fig_02.png[image]
+
+First of all let me call new project +episode_1_intro+. Clear Data Builder supports different ways how you can link ExtJS framework to the application. In my case, I already have installed ExtJS libraries on the my Web Server - Tomcat. So I going to use this local URL, but also you can just specify any folder in your machine and Clear Data Builder will copy file inside your project. Lastly, you can use ExtJS for the Sencha's CDN if you don't want to store these libraries inside your project. I don't want to use any frameworks for this demonstration. I don't want to use MyBatis or Hibernate, and I don't want to have Spring integration for now. Ok, let me click Finish. 
+And as you might see here, first of all you will see output of initial setup of Clear Data Builder. When Clear Data Builder runs first time it initializes directory structure in the WebContent folder. Inside WebContent directory CDB creates directory structure which is the recommended by Sencha for MVC applications. Also we have here the HTML wrapper - +index.html+ - for this application and we will see link to entry point of our application. Clear Data Builder generates empty project with one sample controller and oneview - +Viewport.js+. Let me run this application. I need to add Dynamic Web Project to Tomcat and start the server. 
+Ok, our application is up and running. 
+Let me switch to web browser to open this application on +http://localhost:8080/episode_1_intro+ . Boom! Just in couple minutes we've setup new Dynamic Web Project with the ExtJS framework support and one fancy button on UI.
+
+[[FIG_2]]
+.Running scaffolded application
+image:fig_02.png[image]
 
 === Simple CRUD application ===
 
@@ -21,6 +42,15 @@ I will extend application form previous part. For my CRUD application I need  Ja
 include::Person.java[]
 -----------------------------------------------------
 
-For my model I also need to have id. With this annotation I'l tell to Clear Data Builder that this is my id. So, now lets examine the directory of ExtJS MVC application and lets take a look inside the model folder. Inside the model folder we have the folder dto which is the ?? same package as  we have  for our person.java POJO. And lets open person.model. In our case person.model is  extended from generated person.model. This pattern called generation gap. So, if we need to provide some kind of customization we can put this customization inside this person.model, but this underscore file will be generated each and every time when we change something in our model. As you can see here this model contains all fields from our project (что во рту опять???????: first name, id, last name, phone, ssn and etc.??? now we also need to have  actual service to populate data for store.  So, in this case I would like to create  java class in the package service and with name PersonService. Also it will be an interface 
+I need annotate `id` field with `@JSGeneratedId`. With this annotation I'll tell to Clear Data Builder to thread this field as auto generated id. So, now lets examine the directory of ExtJS MVC application and lets take a look inside the model folder. Inside the model folder we have the folder dto which is the corresponds same package +Person.java+. 
+
+[[FIG_4]]
+.Generated from Java class ExtJS model
+image:fig_04.png[image]
+
+As you can see Clear Data Builder generated 2 files. Developers of CDB implemented http://martinfowler.com/dslCatalog/generationGap.html[Generation Gap pattern]. Generation Gap is about keeping the generated and handwritten parts separate by putting them in different classes linked by inheritance. And lets open person.model. In our case +Person.js+ is extended from generated +_Person.js+. If we need to provide customization we need to put this code inside +Person.js+, but this underscore file will be generated each and every time when we change something in our model. As you can see here this model contains all fields from our Person dto. 
+Now we need to create actual service to populate store with data. I need to create interface in the package `service` and with name `PersonService`. 
+
+=== Data pagination ===
 
 
