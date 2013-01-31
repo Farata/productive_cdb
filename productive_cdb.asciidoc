@@ -1,53 +1,77 @@
-== Productive Enterprise Web Development with ExtJs and Clear Data Builder ==
-by Yakov Fain and Viktor Gamov ( http://faratasystems.com[Farata Systems] )
+= Productive Enterprise Web Development with ExtJs and Clear Data Builder = 
+Viktor Gamov
+2013-01-30
+:icons:
+:data-uri:
+:Email:     viktor.gamov@faratasystems.com
+:Revision:  0.1
 
-This is the article about HTML5 open source productivity tool called Clear Data Builder. In this article you will learn how jump start  development of the Web application ExtJS framework, Ext Direct, and Java. 
+It's not likely that you'll start developing an enterprise HTML5 applicationa without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, ( http://faratasystems.com[Farata Systems] ) has developed an open source Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
 
-=== Part One: ExtJS MVC Application Scaffolding ===
+== Part One: ExtJS MVC Application Scaffolding ==
 
-Here is agenda for part one:
+In part one I'll cover the following topics:
 
 - What is Clear Data Builder
-- Create ExtJS MVC application for Java project
-- Run your first ExtJS+Java application on Tomcat
+- How to create ExtJS MVC application for Java-based project
+- How deploy and run your first ExtJS+Java application on Apache Tomcat server
 
-In this article we're going to talk how you can be more productive using open-source Eclipse Plug-in called Clear Data Builder. You will see how to do more with less effort while you are developing Enterprise Web applications with ExtJS and Java back end. In this article we will show how Clear Data Builder helps in day-to-day tasks of enterprise web developer: integrate client side to backend in RPC style, implements data pagination for your application.
-First, we want to explain what is a Clear Data Builder and how and where you can get it. How to install and start using it. Next I will show you how you can create an ExtJS application for Java project. 
-Clear Data Builder for Ext JS (CDB) is an open source and free productivity tool to build applications with HTML5, JavaScript and Java EE technologies. CDB distribution available as Eclipse plug-in. Update site of recent version could be found http://cleartoolkit.com/downloads/plugins/extjs/cleardatabuilder/4.1.4/[here].  We current version is 4.1.4. You can install this plug-in via +Install New Software+ menu in Eclipse. We have it installed in Eclipse. <<FIG_1>> shows how you can validate plug-in installation.
-And if you see this name over here inside Installed Software in your Eclipse you might be sure that you can actually start developing the application.
+To be more productive means to write less code and produce the results faster. This is what CDB is for. in this article you'll see how Clear Data Builder helps you to integrate the client side with the back end using the RPC style and how to implements data pagination for your application.
+
+CDB distribution available as plug-in for Eclipse IDE. The current update site of CDB is located http://cleartoolkit.com/downloads/plugins/extjs/cleardatabuilder/4.1.4/[here].  The current version is 4.1.4 (don't be surprised - this is a five-year old code generator, and its previous versions were made for generating the UI for Adobe Flex framework). You can install this plug-in via +Install New Software+ menu in Eclipse IDE. The <<FIG_1>> shows how you can validate plug-in installation. If you see "Clear Data Builder for EXTJS feature" in the list of Installed Software in your Eclipse IDE, you're good to go.
+
+IMPORTANT: You have to have "Eclipse for Java EE Developers" installed, which includes the plugins for automation of the Web applications.
 
 [[FIG_1]]
-.Check Clear Data Builder installation
+.Verifying CDB installation
 image:fig_01.png[image]
 
-Lets start with the creation of the new project with New -> Other and select here Clear and click Next. Clear Data Builder comes with set of prepared examples that demonstrates integration with popular Java frameworks - MyBatis, Hibernate, Spring. Also, plain Java project example available as well. Let's create New project for scratch.
+Clear Data Builder comes with a set of prepared examples that demonstrate the integration with popular Java frameworks - MyBatis, Hibernate, and Spring. Also, a plain Java project example that doesn't use any of the frameworks is available as well. Let's start with the creation of the new project by selecting the menu File -> New -> Other -> Clear, and then press Next. 
 
 [[FIG_2]]
 .New CDB Project Wizard
 image:fig_02.png[image]
 
-First of all let's call new project +episode_1_intro+. Clear Data Builder supports different ways how you can link ExtJS framework to the application. In my case, I already have installed ExtJS libraries on the web werver - Tomcat. We're going to use this local URL, but also you can just specify any folder in your machine and Clear Data Builder will copy file inside your project. Lastly, you can use ExtJS from the Sencha's CDN if you don't want to store these libraries inside your project. We don't want to use any frameworks (like MyBatis or Hibernate)for this demonstration. And we don't want to have Spring integration for now. Ok, let me click Finish. 
-First of all you will see output of initial setup of Clear Data Builder in Eclipse console. When Clear Data Builder runs first time it initializes directory structure in the +WebContent+ folder. Inside WebContent directory CDB creates directory structure which is the recommended by Sencha for MVC applications. Also we have here the HTML wrapper - +index.html+ - for this application and we will see link to entry point of our application. CDB generates empty project with one sample controller and one view - +Viewport.js+. Let me run this application. I need to add Dynamic Web Project to Tomcat and start the server. 
-Ok, our application is up and running. 
-Let me switch to web browser to open this application on +http://localhost:8080/episode_1_intro+ . Boom! Just in couple minutes we've setup new Dynamic Web Project with the ExtJS framework support and one fancy button on UI.
+First of all let's call the new project +episode_1_intro+. CDB supports different ways of linking ExtJS framework to the application. In my case, I already have installed ExtJS libraries under my Web server (Apache Tomcat). We're going to use this local ExtJS URL, but you can just specify any folder in your machine and CDB will copy the ExtJS file inside your project. Lastly, you can use ExtJS from the Sencha's CDN, if you don't want to store these libraries inside your project. Besides, using a common CDN will allow Web browser to reuse the cached version of ExtJS. 
+
+For this project we are not going to use any server-side (like MyBatis or Hibernate). Just click the button Finish. First of all, CDB will print some initial messages on the Eclipse console. When CDB runs for the first time it initializes directory structure in the +WebContent+ folder. Inside the WebContent directory CDB creates directory structure which is recommended by Sencha for MVC applications. Also you'll get the HTML wrapper - +index.html+ - for this application, which contains the link to the entry point of our application. 
+
+CDB generates an empty project with one sample controller and one view - +Viewport.js+. To run this application, you need to add the newly generated Dynamic Web Project to Tomcat and start the server (write-click on the Tomcat in the Servers view).  
+
+[[FIG_5]]
+.Adding web project to Tomcat
+image:fig_05.png[image]
+
+Let me switch to web browser to open this application on +http://localhost:8080/episode_1_intro+ . Voila! Just in couple minutes we've setup new Dynamic Web Project with the ExtJS framework support and one fancy button on UI.
 
 [[FIG_2]]
 .Running scaffolded application
 image:fig_03.png[image]
 
-=== Part two: Simple CRUD application ===
+<vik>
+Let's see what we can do with this application.
+</vik>
 
-Part two agenda:
+== Part Two: Generating a CRUD application ==
 
-- Create simple CRUD ExtJS+Java application
-    * Create POJO and corresponding `Ext.data.Model`
-    * Create Java service and populate `Ext.data.Store` with data from service
-    * Use auto-generated ExtJS application
-    * Extending auto-generated CRUD methods
+CRUD stands for Create-Retrieve-Update-Delete. It's a well known term for describing the applications that support data manipulation. They can retrieve the data from some data source and update them too. The Part Two agenda is covering exactly this:
+
+- Create a simple CRUD ExtJS+Java application
+    * Create a POJO and corresponding `Ext.data.Model`
+    * Create s Java service and populate `Ext.data.Store` with data from service
+    * Use the auto-generated ExtJS application
+    * Extend the auto-generated CRUD methods
     * Use *ChangeObject*
 
-Now I would like to show how to use Clear Data Builder to create CRUD applications. I'll show you how you can turn your Java POJO class into ExtJS model. I'll show you how you can populate ExtJS store from remote service and also I'll show you how you can use automatically generated UI for that application and how you can extend it and I will provide brief explanation of `ChangeObject` class.
-I will extend application form previous part. For my CRUD application I need  Java POJO.  I called this package `dto` and +Person.java+. I will add couple fields: `firstName`, `lastName`, `address`, `ssn` and `phone` and `id`. Also I need getters and setters for this fields. Also it is good to have constructor for class from the fields and `toString()` method. <<LISTING_1>> So far so good. Now I want to have the same corresponding ExtJS model for my Person. In this case I need to annotate this class with annotation called `@JSClass`. This annotation will tell Clear Data Builder to generate the model. 
+Now I would like to show how to use Clear Data Builder to create CRUD applications. I'll show you how you can turn your Java POJO class into the ExtJS model. I'll explain the following:
+
+* how you can populate the ExtJS store from a remote service
+* how you can use automatically generated UI for that application
+* how you can extend it
+* what the `ChangeObject` class is for
+
+I will extend the application from Part 1. For my CRUD application I need a Java POJO.  First, I've created the class +Person.java+ in the package `dto`. Then I've added the fields `firstName`, `lastName`, `address`, `ssn` and `phone` and `id`. Also I need getters and setters for these fields. It's good to have a constructor for the that uses these fields,  and a DTO class should have a `toString()` method. <<LISTING_1>> 
+Now I need the same corresponding ExtJS model for my +Person+. Just annotate this class with the CDB annotation called `@JSClass` to ask CDB to generate the ExtJS model. 
 
 [[LISTING_1]]
 [source,java]
@@ -55,27 +79,68 @@ I will extend application form previous part. For my CRUD application I need  Ja
 include::Person.java[]
 -----------------------------------------------------
 
-I need annotate `id` field with `@JSGeneratedId`. With this annotation I'll tell to Clear Data Builder to thread this field as auto generated id. So, now lets examine the directory of ExtJS MVC application and lets take a look inside the model folder. Inside the model folder we have the folder dto which is the corresponds same package +Person.java+. 
+Now I need to annotate the `id` field with the CDB annotation `@JSGeneratedId`. With this annotation I'll instruct CDB to threat this field as auto generated id. Let's examine the directory of ExtJS MVC application and lets take a look inside the model folder. Inside the model folder (the JavaScript section) we have the folder dto which corresponds to the Java dto package where the class +Person.java+ resides. 
 
 [[FIG_4]]
 .Generated from Java class ExtJS model
 image:fig_04.png[image]
 
-As you can see Clear Data Builder generated 2 files. Developers of CDB implemented http://martinfowler.com/dslCatalog/generationGap.html[Generation Gap pattern]. Generation Gap is about keeping the generated and handwritten parts separate by putting them in different classes linked by inheritance. And lets open person.model. In our case +Person.js+ is extended from generated +_Person.js+. If we need to provide customization we need to put this code inside +Person.js+, but this underscore file will be generated each and every time when we change something in our model. As you can see here this model contains all fields from our Person dto. 
-Now we need to create actual service to populate store with data. I need to create interface in the package `service` and with name `PersonService`. 
+As you can see Clear Data Builder generated two files. CDB uses the  http://martinfowler.com/dslCatalog/generationGap.html[Generation Gap pattern], which is about keeping the generated and handwritten parts separate by putting them in different classes linked by inheritance. Let's open the person model. In our case the +Person.js+ is extended from the generated +_Person.js+. Should we need to customize this class, we'll do it inside the +Person.js+, but this underscore-prefixed file will be regenerated each and every time when we change something in our model. As you can see here this model contains all the fields from our Person dto. 
+
+Now we need to create the Java service to populate the ExtJS store with the data. Let's create interface in the package `service` with the name `PersonService`. 
 
 TBD
 
-=== Data pagination ===
+== Part Three: Data Pagination ==
 
-Here is agenda for part 3
+Here is agenda for the Part 3
 
-* Extend simple CRUD ExtJS+Java application with data pagination
+* Add the  data pagination to our sample CRUD ExtJS+Java application:
+
     ** Add `Ext.toolbar.Paging` component
     ** Bind _grid_ and _pagingtoolbar_ to same store
     ** Use `DirectOptions` class to read pagination parameters
 
-=== Links ===
+<vik>
+We are going to extend our CRUD application from previous part with adding the paging toolbar component bind to the same store as grid. We are going to use `DirectOptions` class to read pagination parameters on the server side. 
+
+What is the pagination? Pagination is very important thing to know for enterprise web developers. In many cases, you don't want to load all available data in one shot, you want to show only required pieces of your data. This approach allows user to navigate back and forth between pages using different pagination UI components (pagers, _Back_ and _Forward_ buttons). To do that, we need to split our data on the server side into chunks so we can display it only once specific page is required. 
+
+From previous part you've learned how you can generate UI from Java back end service and how we can generate the ExtJS store and ExtJS model.  In this part I'll show you how to add pagination functionality to your application easily and handle this information on the server side an how to send only required data. In this case, I need to refactor service code from previous example. I want to generate a little bit more data than only five records. <<LISTING_2>>
+
+[[LISTING_2]]
+[source,java]
+----------------------------------------------------------------------
+
+public class PersonServiceImpl extends _PersonServiceImpl {
+
+  @Override
+    public List<Person> getPersons() {
+        List<Person> result = new ArrayList<>();
+        
+        for (int i=0; i<1000; i++){
+            result.add(new Person(i, "Joe", "Doe", "555-55-55", "1111-11-1111"));
+        }
+        
+        return result;
+    }
+    
+}
+
+----------------------------------------------------------------------
+
+In Google Chrome Console we can see that `PersonStore` was loaded with one thousand records. Let's add the pagination component. And in this case I would like to use Ext `toolbarpaging` component. Let's add it to +sampleApp.js+ file <<LISTING_3>>. In this case I'm interesting in docked items. I would like to reference this component with +xtype+. And +xtype+ of this component is `pagingtoolbar`. I would like to display information and also to dock this element at the top. 
+
+[[LISTING_3]]
+[source,javascript]
+-----------------------------------------------------
+include::sampleApp.js[]
+-----------------------------------------------------
+</vik>
+
+To help you with repeating all of the above instruction on you own, I've recorded http://faratasystems.com/training-at-farata-youtube-chanel/[the screencasts] where I perform all the actions described in this article.
+
+=== Additional Useful Links ===
 
 * http://farata.github.com/ClearJS/[Clear Toolkit on Github]
 * http://cleartoolkit.com/downloads/plugins/extjs/cleardatabuilder/4.1.4/[Clear Data Builder Eclipse update site]
