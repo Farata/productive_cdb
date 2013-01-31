@@ -26256,60 +26256,21 @@ Ext<span style="color: #990000">.</span><span style="font-weight: bold"><span st
                 ptype <span style="color: #990000">:</span> <span style="color: #FF0000">'cellediting'</span>
         <span style="color: #FF0000">}</span><span style="color: #990000">],</span>
         dockedItems<span style="color: #990000">:</span> <span style="color: #990000">[</span>
-        <span style="color: #FF0000">{</span>
-                xtype<span style="color: #990000">:</span> <span style="color: #FF0000">'pagingtoolbar'</span><span style="color: #990000">,</span>
-                displayInfo<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
-                dock<span style="color: #990000">:</span> <span style="color: #FF0000">'top'</span><span style="color: #990000">,</span>
-                store<span style="color: #990000">:</span> myStore
-        <span style="color: #FF0000">}</span>
+                <span style="color: #FF0000">{</span> xtype<span style="color: #990000">:</span> <span style="color: #FF0000">'pagingtoolbar'</span><span style="color: #990000">,</span>displayInfo<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span> dock<span style="color: #990000">:</span> <span style="color: #FF0000">'top'</span><span style="color: #990000">,</span> store<span style="color: #990000">:</span> myStore <span style="color: #FF0000">}</span>
         <span style="color: #990000">],</span>
-        columns <span style="color: #990000">:</span> <span style="color: #990000">[</span><span style="color: #FF0000">{</span>
-                header <span style="color: #990000">:</span> <span style="color: #FF0000">'firstName'</span><span style="color: #990000">,</span>
-                dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'firstName'</span><span style="color: #990000">,</span>
-                editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>
-                        xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span>
-                <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
-                flex <span style="color: #990000">:</span> <span style="color: #993399">1</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
-                header <span style="color: #990000">:</span> <span style="color: #FF0000">'id'</span><span style="color: #990000">,</span>
-                dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'id'</span><span style="color: #990000">,</span>
-                flex <span style="color: #990000">:</span> <span style="color: #993399">1</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
-                header <span style="color: #990000">:</span> <span style="color: #FF0000">'lastName'</span><span style="color: #990000">,</span>
-                dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'lastName'</span><span style="color: #990000">,</span>
-                editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>
-                        xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span>
-                <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
-                flex <span style="color: #990000">:</span> <span style="color: #993399">1</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
-                header <span style="color: #990000">:</span> <span style="color: #FF0000">'phone'</span><span style="color: #990000">,</span>
-                dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'phone'</span><span style="color: #990000">,</span>
-                editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>
-                        xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span>
-                <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
-                flex <span style="color: #990000">:</span> <span style="color: #993399">1</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
-                header <span style="color: #990000">:</span> <span style="color: #FF0000">'ssn'</span><span style="color: #990000">,</span>
-                dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'ssn'</span><span style="color: #990000">,</span>
-                editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>
-                        xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span>
-                <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
-                flex <span style="color: #990000">:</span> <span style="color: #993399">1</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">],</span>
-        tbar <span style="color: #990000">:</span> <span style="color: #990000">[</span><span style="color: #FF0000">{</span>
-                text <span style="color: #990000">:</span> <span style="color: #FF0000">'Load'</span><span style="color: #990000">,</span>
-                action <span style="color: #990000">:</span> <span style="color: #FF0000">'load'</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
-                text <span style="color: #990000">:</span> <span style="color: #FF0000">'Add'</span><span style="color: #990000">,</span>
-                action <span style="color: #990000">:</span> <span style="color: #FF0000">'add'</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
-                text <span style="color: #990000">:</span> <span style="color: #FF0000">'Remove'</span><span style="color: #990000">,</span>
-                action <span style="color: #990000">:</span> <span style="color: #FF0000">'remove'</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">,</span> <span style="color: #FF0000">{</span>
-                text <span style="color: #990000">:</span> <span style="color: #FF0000">'Sync'</span><span style="color: #990000">,</span>
-                action <span style="color: #990000">:</span> <span style="color: #FF0000">'sync'</span>
-        <span style="color: #FF0000">}</span><span style="color: #990000">]</span>
-<span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+        columns <span style="color: #990000">:</span> <span style="color: #990000">[</span>
+                <span style="color: #FF0000">{</span>header <span style="color: #990000">:</span> <span style="color: #FF0000">'firstName'</span><span style="color: #990000">,</span> dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'firstName'</span><span style="color: #990000">,</span> editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span><span style="color: #FF0000">}</span><span style="color: #990000">,</span> flex <span style="color: #990000">:</span> <span style="color: #993399">1</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">{</span>header <span style="color: #990000">:</span> <span style="color: #FF0000">'id'</span><span style="color: #990000">,</span> dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'id'</span><span style="color: #990000">,</span> flex <span style="color: #990000">:</span> <span style="color: #993399">1</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">{</span>header <span style="color: #990000">:</span> <span style="color: #FF0000">'lastName'</span><span style="color: #990000">,</span> dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'lastName'</span><span style="color: #990000">,</span> editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span><span style="color: #FF0000">}</span><span style="color: #990000">,</span> flex <span style="color: #990000">:</span> <span style="color: #993399">1</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">{</span>header <span style="color: #990000">:</span> <span style="color: #FF0000">'phone'</span><span style="color: #990000">,</span> dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'phone'</span><span style="color: #990000">,</span> editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span><span style="color: #FF0000">}</span><span style="color: #990000">,</span> flex <span style="color: #990000">:</span> <span style="color: #993399">1</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">{</span>header <span style="color: #990000">:</span> <span style="color: #FF0000">'ssn'</span><span style="color: #990000">,</span> dataIndex <span style="color: #990000">:</span> <span style="color: #FF0000">'ssn'</span><span style="color: #990000">,</span> editor <span style="color: #990000">:</span> <span style="color: #FF0000">{</span>xtype <span style="color: #990000">:</span> <span style="color: #FF0000">'textfield'</span><span style="color: #FF0000">}</span><span style="color: #990000">,</span> flex <span style="color: #990000">:</span> <span style="color: #993399">1</span> <span style="color: #FF0000">}</span><span style="color: #990000">],</span>
+        tbar <span style="color: #990000">:</span> <span style="color: #990000">[</span>
+                <span style="color: #FF0000">{</span>text <span style="color: #990000">:</span> <span style="color: #FF0000">'Load'</span><span style="color: #990000">,</span> action <span style="color: #990000">:</span> <span style="color: #FF0000">'load'</span><span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">{</span>text <span style="color: #990000">:</span> <span style="color: #FF0000">'Add'</span><span style="color: #990000">,</span> action <span style="color: #990000">:</span> <span style="color: #FF0000">'add'</span><span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">{</span>text <span style="color: #990000">:</span> <span style="color: #FF0000">'Remove'</span><span style="color: #990000">,</span> action <span style="color: #990000">:</span> <span style="color: #FF0000">'remove'</span><span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">{</span>text <span style="color: #990000">:</span> <span style="color: #FF0000">'Sync'</span><span style="color: #990000">,</span> action <span style="color: #990000">:</span> <span style="color: #FF0000">'sync'</span><span style="color: #FF0000">}</span>
+                <span style="color: #990000">]</span>
+        <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
 <span style="font-style: italic"><span style="color: #9A1900">// Launch the application</span></span>
 Ext<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">application</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span>
         name <span style="color: #990000">:</span> <span style="color: #FF0000">'episode_3_pagination'</span><span style="color: #990000">,</span>

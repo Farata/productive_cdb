@@ -19,60 +19,21 @@ Ext.define('episode_3_pagination.view.SampleGridPanel', {
 		ptype : 'cellediting'
 	}],
 	dockedItems: [
-	{
-		xtype: 'pagingtoolbar',
-		displayInfo: true,
-		dock: 'top',
-		store: myStore
-	}
+		{ xtype: 'pagingtoolbar',displayInfo: true, dock: 'top', store: myStore }
 	],
-	columns : [{
-		header : 'firstName',
-		dataIndex : 'firstName',
-		editor : {
-			xtype : 'textfield'
-		},
-		flex : 1
-	}, {
-		header : 'id',
-		dataIndex : 'id',
-		flex : 1
-	}, {
-		header : 'lastName',
-		dataIndex : 'lastName',
-		editor : {
-			xtype : 'textfield'
-		},
-		flex : 1
-	}, {
-		header : 'phone',
-		dataIndex : 'phone',
-		editor : {
-			xtype : 'textfield'
-		},
-		flex : 1
-	}, {
-		header : 'ssn',
-		dataIndex : 'ssn',
-		editor : {
-			xtype : 'textfield'
-		},
-		flex : 1
-	}],
-	tbar : [{
-		text : 'Load',
-		action : 'load'
-	}, {
-		text : 'Add',
-		action : 'add'
-	}, {
-		text : 'Remove',
-		action : 'remove'
-	}, {
-		text : 'Sync',
-		action : 'sync'
-	}]
-});
+	columns : [
+		{header : 'firstName', dataIndex : 'firstName', editor : {xtype : 'textfield'}, flex : 1 },
+		{header : 'id', dataIndex : 'id', flex : 1 },
+		{header : 'lastName', dataIndex : 'lastName', editor : {xtype : 'textfield'}, flex : 1 },
+		{header : 'phone', dataIndex : 'phone', editor : {xtype : 'textfield'}, flex : 1 },
+		{header : 'ssn', dataIndex : 'ssn', editor : {xtype : 'textfield'}, flex : 1 }],
+	tbar : [
+		{text : 'Load', action : 'load'},
+		{text : 'Add', action : 'add'},
+		{text : 'Remove', action : 'remove'},
+		{text : 'Sync', action : 'sync'}
+		]
+	});
 // Launch the application
 Ext.application({
 	name : 'episode_3_pagination',
