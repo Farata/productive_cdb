@@ -9,7 +9,7 @@ Ext.Loader.setConfig({
 
 Ext.syncRequire('episode_3_pagination.init.InitDirect');
 // Define GridPanel
-var myStore = Ext.create('episode_3_pagination.store.dto.PersonStore',{});
+var myStore = Ext.create('episode_3_pagination.store.dto.PersonStore',{});			//<1>
 Ext.define('episode_3_pagination.view.SampleGridPanel', {
 	extend : 'Ext.grid.Panel',
 	store : myStore,
@@ -19,7 +19,12 @@ Ext.define('episode_3_pagination.view.SampleGridPanel', {
 		ptype : 'cellediting'
 	}],
 	dockedItems: [
-		{ xtype: 'pagingtoolbar',displayInfo: true, dock: 'top', store: myStore }
+		{
+			xtype: 'pagingtoolbar',													//<2>
+			displayInfo: true,
+			dock: 'top',
+			store: myStore															//<3>
+		}
 	],
 	columns : [
 		{header : 'firstName', dataIndex : 'firstName', editor : {xtype : 'textfield'}, flex : 1 },
