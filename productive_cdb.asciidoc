@@ -38,15 +38,15 @@ For this project we are not going to use any server-side (like MyBatis or Hibern
 
 CDB generates an empty project with one sample controller and one view - +Viewport.js+. To run this application, you need to add the newly generated Dynamic Web Project to Tomcat and start the server (write-click on the Tomcat in the Servers view).  
 
-[[FIG_5]]
+[[FIG_3]]
 .Adding web project to Tomcat
-image:fig_05.png[image]
+image:fig_03.png[image]
 
 Let me switch to web browser to open this application on +http://localhost:8080/episode_1_intro+ . Voila! Just in couple minutes we've setup new Dynamic Web Project with the ExtJS framework support and one fancy button on UI.
 
-[[FIG_2]]
+[[FIG_4]]
 .Running scaffolded application
-image:fig_03.png[image]
+image:fig_04.png[image]
 
 The next step is to make something useful out of this basic application.
 
@@ -81,9 +81,9 @@ Now I need to annotate the `id` field with the CDB annotation `@JSGeneratedId`. 
 
 <vik>
 
-[[FIG_4]]
+[[FIG_5]]
 .Generated from Java class ExtJS model
-image:fig_04.png[image]
+image:fig_05.png[image]
 
 As you can see Clear Data Builder generated two files. CDB uses the  http://martinfowler.com/dslCatalog/generationGap.html[Generation Gap pattern], which is about keeping the generated and handwritten parts separate by putting them in different classes linked by inheritance. Let's open the person model. In our case the +Person.js+ is extended from the generated +_Person.js+. Should we need to customize this class, we'll do it inside the +Person.js+, but this underscore-prefixed file will be regenerated each and every time when we change something in our model. <vik> CDB follows this pattern for all generated artifacts - java services, ExtJS modes and stores. </vik>
 
@@ -110,18 +110,18 @@ public interface PersonService {
 After CDB done with code generation we got the implementation for my service - `PersonServiceImpl`. Let's check our +store+ folder inside application folder (+WebContent\app+). We got this store which is bind to +Person+ model. And my person model was generated previously. In this case  Clear Data Builder generated store that binds to the remote service. 
 
 All this intermediate translation from the JavaScript to Java and from Java to JavaScript done by DirectJNgine. This is the server side implementation of Ext Direct Protocol. You will find links and can read about this protocol in http://www.sencha.com/products/extjs/extdirect[official documentation]. 
-Here is a cool thing - Clear Data Builder generates UI for us!  Let's check +samples+ directory <<FIG_07>>
+Here is a cool thing - Clear Data Builder generates UI for us!  Let's check +samples+ directory <<FIG_06>>
 
-[[FIG_7]]
+[[FIG_6]]
 .Folder with generated samples
-image:fig_07.png[image]
+image:fig_06.png[image]
 
 We can found +SampleController+ and +SampleGrid+ panel inside the samples folder. And Clear Data Builder also generates application entry - +sampleApp.js+. To test this we need just copy +SampleController.js+ in +controller+ folder, +SampleGrid.js+ panel in the +view+ folder, and sample application in the root of our +WebContent+ folder. We need change application entry point with sampleApp.
-This is our sample application <<FIG-8>>
+This is our sample application <<FIG-7>>
 
-[[FIG_8]]
+[[FIG_7]]
 .Scaffolded CRUD application template
-image:fig_08.png[image]
+image:fig_07.png[image]
 
 Let's return to our server side code. As I mentioned before, for services CDB also following the _Generation Gap Pattern_ and Clear Data Builder also generated stubs for our service methods. And if we need to _implement_ our CRUD functionality we need to override this methods <<LISTING_7>>. 
 
@@ -130,13 +130,12 @@ Let's return to our server side code. As I mentioned before, for services CDB al
 ----------------------------------------------------------------------
 include::2_PersonServiceImpl.java[]
 ----------------------------------------------------------------------
-<1> 
-<2> I need to generate of in-memory objects. In this case I want to insert in-line data and I would use default constructor with fields to populate data. 
-<3> `getPerson` is our Read method.
+<1> We need to extend generated method and provide actual implementation.
+<2> `getPerson` is our Read method.
+<3> I need to generate of in-memory objects. In this case I want to insert in-line data and I would use default constructor with fields to populate data. 
 <4> +fillmethod++`doCreate()` is our create method.
-<5> +fillmethod++`doUpdate` is our update method 
-<6> +fillmethod++`doDelete` is our delete method.     
-<7>      
+<5> +fillmethod++`doUpdate` is our update method. 
+<6> +fillmethod++`doDelete` is our delete method.
 
 When I click +Load+ we get 4 persons from our server side. How to send data back. 
 The Clear Data Builder generates code that you can easily extend. So once you want to add something we can enter data directly into grid. In this case, new instance of PersonModel will be created and added to store. And when I click Sync button changes will be sent to corresponding remote method. Data was processed on the server and Clear Data Builder injects this data in form of `ChangeObject`. It is a class (part of ClearToolkit server side component). When you need to read data that comes from the client side you just need to use `changeObject.getNewVersion()` and this method will return object that you need to deserialize into your actual domain object - Person. After that you can do what ever you want to do it - persist it in database, send over the wire with JMS and etc.
@@ -202,16 +201,16 @@ Right now the pagination doesn't work and each and every time we are receiving o
 
 In this case lets go to Network information and we will actually what information has been sent to the server when user clicks on the forward and backward. In this case I need to examine the direct provider URL and see how the request looks like. We see that each and every time when user clicks on the forward or backward this component sends `directOptions`. 
 
-[[FIG_6]]
+[[FIG_8]]
 .Request payload details
-image::fig_06.png[image]
+image::fig_08.png[image]
 
 It's the small extension, small plug-in of Clear JS to add this functionality to ExtJS direct store component. At this point, we start using these direct options on the server side to easily get information about page's boundaries. Let's return to `PersonServiceImpl` code and let me put some extra code here. 
 
 [[LISTING_5]]
 [source,java]
 ----------------------------------------------------------------------
-include::PersonServiceImpl.java[]
+include::3_PersonServiceImpl.java[]
 ----------------------------------------------------------------------
 <1> On the server side there is a special object available called DirectOptions. And DirectOptions is a part of Clear Toolkit server side components.
 <2> I'm interesting in +start+ and in +limit+ options that we saw on <<FIG_6>> .
