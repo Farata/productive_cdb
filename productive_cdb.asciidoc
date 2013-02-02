@@ -22,15 +22,15 @@ CDB distribution available as plug-in for Eclipse IDE. The current update site o
 
 IMPORTANT: You have to have "Eclipse for Java EE Developers" installed, which includes the plugins for automation of the Web applications.
 
-[[FIG_1]]
+[[FIG-1]]
 .Verifying CDB installation
-image:fig_01.png[image]
+image::fig_01.png[image]
 
 Clear Data Builder comes with a set of prepared examples that demonstrate the integration with popular Java frameworks - MyBatis, Hibernate, and Spring. Also, a plain Java project example that doesn't use any of the frameworks is available as well. Let's start with the creation of the new project by selecting the menu File -> New -> Other -> Clear, and then press Next. 
 
-[[FIG_2]]
+[[FIG-2]]
 .New CDB Project Wizard
-image:fig_02.png[image]
+image::fig_02.png[image]
 
 First of all let's call the new project +episode_1_intro+. CDB supports different ways of linking ExtJS framework to the application. In my case, I already have installed ExtJS libraries under my Web server (Apache Tomcat). We're going to use this local ExtJS URL, but you can just specify any folder in your machine and CDB will copy the ExtJS file inside your project. Lastly, you can use ExtJS from the Sencha's CDN, if you don't want to store these libraries inside your project. Besides, using a common CDN will allow Web browser to reuse the cached version of ExtJS. 
 
@@ -38,15 +38,15 @@ For this project we are not going to use any server-side (like MyBatis or Hibern
 
 CDB generates an empty project with one sample controller and one view - +Viewport.js+. To run this application, you need to add the newly generated Dynamic Web Project to Tomcat and start the server (write-click on the Tomcat in the Servers view).  
 
-[[FIG_3]]
+[[FIG-3]]
 .Adding web project to Tomcat
-image:fig_03.png[image]
+image::fig_03.png[image]
 
 Let me switch to web browser to open this application on +http://localhost:8080/episode_1_intro+ . Voila! Just in couple minutes we've setup new Dynamic Web Project with the ExtJS framework support and one fancy button on UI.
 
-[[FIG_4]]
+[[FIG-4]]
 .Running scaffolded application
-image:fig_04.png[image]
+image::fig_04.png[image]
 
 The next step is to make something useful out of this basic application.
 
@@ -68,10 +68,10 @@ Now I would like to show how to use Clear Data Builder to create CRUD applicatio
 * how you can extend it
 * what the `ChangeObject` class is for
 
-I will extend the application from Part 1. For my CRUD application I need a Java POJO.  First, I've created the class +Person.java+ in the package `dto`. Then I've added the fields `firstName`, `lastName`, `address`, `ssn` and `phone` and `id`. Also I need getters and setters for these fields. It's good to have a constructor for the that uses these fields,  and a DTO class should have a `toString()` method. <<LISTING_1>> 
+I will extend the application from Part 1. For my CRUD application I need a Java POJO.  First, I've created the class +Person.java+ in the package `dto`. Then I've added the fields `firstName`, `lastName`, `address`, `ssn` and `phone` and `id`. Also I need getters and setters for these fields. It's good to have a constructor for the that uses these fields,  and a DTO class should have a `toString()` method. <<LISTING-1>> 
 Now I need the same corresponding ExtJS model for my +Person+. Just annotate this class with the CDB annotation called `@JSClass` to ask CDB to generate the ExtJS model. 
 
-[[LISTING_1]]
+[[LISTING-1]]
 [source,java]
 -----------------------------------------------------
 include::Person.java[]
@@ -81,9 +81,9 @@ Now I need to annotate the `id` field with the CDB annotation `@JSGeneratedId`. 
 
 <vik>
 
-[[FIG_5]]
+[[FIG-5]]
 .Generated from Java class ExtJS model
-image:fig_05.png[image]
+image::fig_05.png[image]
 
 As you can see Clear Data Builder generated two files. CDB uses the  http://martinfowler.com/dslCatalog/generationGap.html[Generation Gap pattern], which is about keeping the generated and handwritten parts separate by putting them in different classes linked by inheritance. Let's open the person model. In our case the +Person.js+ is extended from the generated +_Person.js+. Should we need to customize this class, we'll do it inside the +Person.js+, but this underscore-prefixed file will be regenerated each and every time when we change something in our model. <vik> CDB follows this pattern for all generated artifacts - java services, ExtJS modes and stores. </vik>
 
@@ -96,6 +96,7 @@ For example purposes, my service need to return list on persons. This interface 
 I need to tell CDB that I would like to expose this service as the remote object. For this I use the annotation called `@JSService`. Also I need to tell to CDB that I would like to generate store. For this I'll use annotation `@JSGenetareStore`. In this case CDB will create "destination-aware store". This means that store will know from where to populate it's content. All configuration of store's proxies will be handled by code generator. With `@JSFillMethod` annotation we will indicate out main read method (remember R from CRUD). 
 Also it would be nice to have some sort of UI to test how this service is working.  For this I will use annotation called `@JSGenerateSample`. At this point, Clear Data Builder will examine this file, will find this annotations and will generate ExtJS MVC artifacts (models, views, controller) with Sample application. 
 
+[[LISTING-2]]
 [source,java]
 ----------------------------------------------------------------------
 @JSService
@@ -110,22 +111,22 @@ public interface PersonService {
 After CDB done with code generation we got the implementation for my service - `PersonServiceImpl`. Let's check our +store+ folder inside application folder (+WebContent\app+). We got this store which is bind to +Person+ model. And my person model was generated previously. In this case  Clear Data Builder generated store that binds to the remote service. 
 
 All this intermediate translation from the JavaScript to Java and from Java to JavaScript done by DirectJNgine. This is the server side implementation of Ext Direct Protocol. You will find links and can read about this protocol in http://www.sencha.com/products/extjs/extdirect[official documentation]. 
-Here is a cool thing - Clear Data Builder generates UI for us!  Let's check +samples+ directory <<FIG_06>>
+Here is a cool thing - Clear Data Builder generates UI for us!  Let's check +samples+ directory <<FIG-06>>
 
-[[FIG_6]]
+[[FIG-6]]
 .Folder with generated samples
-image:fig_06.png[image]
+image::fig_06.png[image]
 
 We can found +SampleController+ and +SampleGrid+ panel inside the samples folder. And Clear Data Builder also generates application entry - +sampleApp.js+. To test this we need just copy +SampleController.js+ in +controller+ folder, +SampleGrid.js+ panel in the +view+ folder, and sample application in the root of our +WebContent+ folder. We need change application entry point with sampleApp.
 This is our sample application <<FIG-7>>
 
-[[FIG_7]]
+[[FIG-7]]
 .Scaffolded CRUD application template
-image:fig_07.png[image]
+image::fig_07.png[image]
 
-Let's return to our server side code. As I mentioned before, for services CDB also following the _Generation Gap Pattern_ and Clear Data Builder also generated stubs for our service methods. And if we need to _implement_ our CRUD functionality we need to override this methods <<LISTING_7>>. 
+Let's return to our server side code. As I mentioned before, for services CDB also following the _Generation Gap Pattern_ and Clear Data Builder also generated stubs for our service methods. And if we need to _implement_ our CRUD functionality we need to override this methods <<LISTING_3>>. 
 
-[[LISTING_7]]
+[[LISTING_3]]
 [source,java]
 ----------------------------------------------------------------------
 include::2_PersonServiceImpl.java[]
@@ -154,9 +155,9 @@ The pagination feature is needed in almost every enterprise web application. Oft
 
 We are going to extend our CRUD application by adding the paging toolbar component bound to the same store as the grid. The class `DirectOptions` will handle pagination parameters on the server side. 
 
-In Part 1 and 2 you've learned how to generate the UI from the Java back end service and how to generate the ExtJS store and ExtJS model.  In this part you'll how to add the pagination functionality to our CRUD  application by asking the server to send only portions of data. I'll need to refactor the service code from previous example to generate a little bit more data than only five records. <<LISTING_2>>
+In Part 1 and 2 you've learned how to generate the UI from the Java back end service and how to generate the ExtJS store and ExtJS model.  In this part you'll how to add the pagination functionality to our CRUD  application by asking the server to send only portions of data. I'll need to refactor the service code from previous example to generate a little bit more data than only five records. <<LISTING_4>>
 
-[[LISTING_2]]
+[[LISTING_4]]
 [source,java]
 ----------------------------------------------------------------------
 public class PersonServiceImpl extends _PersonServiceImpl {
@@ -171,11 +172,11 @@ public class PersonServiceImpl extends _PersonServiceImpl {
 }
 ----------------------------------------------------------------------
 
-The Google Chrome Console shows that `PersonStore` was populated with one thousand records. Let's add the pagination component using the Ext `toolbarpaging` component. Let's add it to the file +sampleApp.js+ <<LISTING_3>>. 
+The Google Chrome Console shows that `PersonStore` was populated with one thousand records. Let's add the pagination component using the Ext `toolbarpaging` component. Let's add it to the file +sampleApp.js+ <<LISTING_5>>. 
 
 <vik>
 
-[[LISTING_3]]
+[[LISTING_5]]
 [source,javascript]
 -----------------------------------------------------
 include::sampleApp.js[]
@@ -188,7 +189,7 @@ include::sampleApp.js[]
 Now we need to fix automatically generated controller to control loading of data on 
 click of +Load+ button. 
 
-[[LISTING_4]]
+[[LISTING_6]]
 [source,javascript]
 -----------------------------------------------------
 include::SampleController.js[]
@@ -197,23 +198,23 @@ include::SampleController.js[]
 <1> We can get store instance bind to our grid panel. In controller's `refs` property I'm referencing out `simplegrid` panel with `ThePanel` alias.
 <2> In this case I don't need explicitly retrieve store instance by name. Instead, we can use automatically generated by ExtJS framework getter `getPanel()` and `getStore()`.
 
-Right now the pagination doesn't work and each and every time we are receiving one thousand records, because there is no server side is not aware about pagination requirements. Let's fix it <<LISTING_5>> . 
+Right now the pagination doesn't work and each and every time we are receiving one thousand records, because there is no server side is not aware about pagination requirements. Let's fix it <<LISTING-7>> . 
 
 In this case lets go to Network information and we will actually what information has been sent to the server when user clicks on the forward and backward. In this case I need to examine the direct provider URL and see how the request looks like. We see that each and every time when user clicks on the forward or backward this component sends `directOptions`. 
 
-[[FIG_8]]
+[[FIG-8]]
 .Request payload details
 image::fig_08.png[image]
 
 It's the small extension, small plug-in of Clear JS to add this functionality to ExtJS direct store component. At this point, we start using these direct options on the server side to easily get information about page's boundaries. Let's return to `PersonServiceImpl` code and let me put some extra code here. 
 
-[[LISTING_5]]
+[[LISTING_7]]
 [source,java]
 ----------------------------------------------------------------------
 include::3_PersonServiceImpl.java[]
 ----------------------------------------------------------------------
 <1> On the server side there is a special object available called DirectOptions. And DirectOptions is a part of Clear Toolkit server side components.
-<2> I'm interesting in +start+ and in +limit+ options that we saw on <<FIG_6>> .
+<2> I'm interesting in +start+ and in +limit+ options that we saw on <<FIG-8>> .
 <3> I need to calculate actual limit if the size of our collection is less than page size (`start+limit`) we can assign the size of this collection to the `limit` variable.
 <4> Also we need notify the component about total amount of elements on the server side. For this I can use DirectOptions setOption, total and this is size of our initial data set not the paged.
 <5> And before I'll return the result I need to create subset, actual page of data. In this case I need to use method of list called  Sublist and start from start and from limit. And let assign result and lets see how our application is working. 
