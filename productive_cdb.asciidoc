@@ -6,7 +6,7 @@ Viktor Gamov
 :Email:     viktor.gamov@faratasystems.com
 :Revision:  0.1
 
-It's not likely that you'll start developing an enterprise HTML5 applicationa without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, ( http://faratasystems.com[Farata Systems] ) has developed an open source Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
+It's not likely that you'll start developing an enterprise HTML5 applicationa without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, http://faratasystems.com[Farata Systems], has developed an open source Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
 
 == Part One: ExtJS MVC Application Scaffolding ==
 
@@ -48,9 +48,9 @@ Let me switch to web browser to open this application on +http://localhost:8080/
 .Running scaffolded application
 image:fig_03.png[image]
 
-<vik>
-Let's see what we can do with this application.
-</vik>
+
+The next step is to make something useful out of this basic application.
+
 
 == Part Two: Generating a CRUD application ==
 
@@ -93,20 +93,17 @@ TBD
 
 == Part Three: Data Pagination ==
 
-Here is agenda for the Part 3
+The pagination feature is needed in almost every enterprise web application. Often you don't want to bring all the  data to the client at once - a page by page feeds is a lot more responsive. The user can navigate back and forth between the pages using pagination UI components. To do that, we need to split our data on the server side into chunks so we can display it only once specific page is required. Implementing pagination is the agenda for the Part Three of this article. Here's the plan:
 
 * Add the  data pagination to our sample CRUD ExtJS+Java application:
 
-    ** Add `Ext.toolbar.Paging` component
-    ** Bind _grid_ and _pagingtoolbar_ to same store
-    ** Use `DirectOptions` class to read pagination parameters
+    ** Add the `Ext.toolbar.Paging` component
+    ** Bind both _grid_ and _pagingtoolbar_ to the same store
+    ** Use `DirectOptions` class to read the pagination parameters
 
-<vik>
-We are going to extend our CRUD application from previous part with adding the paging toolbar component bind to the same store as grid. We are going to use `DirectOptions` class to read pagination parameters on the server side. 
+We are going to extend our CRUD application by adding the paging toolbar component bound to the same store as the grid. The class `DirectOptions` will handle pagination parameters on the server side. 
 
-What is the pagination? Pagination is very important thing to know for enterprise web developers. In many cases, you don't want to load all available data in one shot, you want to show only required pieces of your data. This approach allows user to navigate back and forth between pages using different pagination UI components (pagers, _Back_ and _Forward_ buttons). To do that, we need to split our data on the server side into chunks so we can display it only once specific page is required. 
-
-From previous part you've learned how you can generate UI from Java back end service and how we can generate the ExtJS store and ExtJS model.  In this part I'll show you how to add pagination functionality to your application easily and handle this information on the server side an how to send only required data. In this case, I need to refactor service code from previous example. I want to generate a little bit more data than only five records. <<LISTING_2>>
+In Part 1 and 2 you've learned how to generate the UI from the Java back end service and how to generate the ExtJS store and ExtJS model.  In this part you'll how to add the pagination functionality to our CRUD  application by asking the server to send only portions of data. I'll need to refactor the service code from previous example to generate a little bit more data than only five records. <<LISTING_2>>
 
 [[LISTING_2]]
 [source,java]
@@ -129,16 +126,15 @@ public class PersonServiceImpl extends _PersonServiceImpl {
 
 ----------------------------------------------------------------------
 
-In Google Chrome Console we can see that `PersonStore` was loaded with one thousand records. Let's add the pagination component. And in this case I would like to use Ext `toolbarpaging` component. Let's add it to +sampleApp.js+ file <<LISTING_3>>. In this case I'm interesting in docked items. I would like to reference this component with +xtype+. And +xtype+ of this component is `pagingtoolbar`. I would like to display information and also to dock this element at the top. 
+The Google Chrome Console shows that `PersonStore` was populated with one thousand records. Let's add the pagination component using the Ext `toolbarpaging` component. Let's add it to the file +sampleApp.js+ <<LISTING_3>>. In this case I'm interested in docked items. I'll add the +xtype+ `pagingtoolbar` to this component. I would like to display the information and dock this element at the top. 
 
 [[LISTING_3]]
 [source,javascript]
 -----------------------------------------------------
 include::sampleApp.js[]
 -----------------------------------------------------
-</vik>
 
-To help you with repeating all of the above instruction on you own, I've recorded http://faratasystems.com/training-at-farata-youtube-chanel/[the screencasts] where I perform all the actions described in this article.
+If you'd like to repeate all of the above steps on you own watch http://faratasystems.com/training-at-farata-youtube-chanel/[the screencasts] where I perform all the actions described in this article.
 
 === Additional Useful Links ===
 
