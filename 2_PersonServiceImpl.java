@@ -21,9 +21,11 @@ public class PersonServiceImpl extends _PersonServiceImpl { // <1>
 
 	@Override
 	public void getPersons_doCreate(ChangeObject changeObject) {  // <4>
-		// TODO Auto-generated method stub
-		changeObject.getNewVersion();				
-		super.getPersons_doCreate(changeObject);
+		Person dto = (Person) deserializeObject(
+				(Map<String, String>) changeObject.getNewVersion(),
+				Person.class);
+
+		System.out.println(dto.toString());
 	}
 
 	@Override

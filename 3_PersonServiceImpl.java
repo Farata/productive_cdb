@@ -14,11 +14,11 @@ public class PersonServiceImpl extends _PersonServiceImpl {
 		for (int i=0; i<1000; i++){
 			result.add(new Person(i, "Joe", "Doe", "555-55-55", "1111-11-1111"));
 		}
-		int start = ((Double)DirectOptions.getOption("start")).intValue();			//<2>
+		int start = ((Double)DirectOptions.getOption("start")).intValue();	//<2>
 		int limit = ((Double)DirectOptions.getOption("limit")).intValue();
-		limit = Math.min(start+limit, result.size() );								//<3>
-		DirectOptions.setOption("total", result.size());							//<4>
-		result = result.subList(start, limit);										//<5>
+		limit = Math.min(start+limit, result.size() );						//<3>
+		DirectOptions.setOption("total", result.size());					//<4>
+		result = result.subList(start, limit);								//<5>
 
 		return result;
 	}
