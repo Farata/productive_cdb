@@ -4,7 +4,6 @@ Viktor Gamov
 :icons:
 :data-uri:
 :Email:     viktor.gamov@faratasystems.com
-:Revision:  0.1
 
 It's not likely that you'll start developing an enterprise HTML5 applicationa without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, http://faratasystems.com[Farata Systems], has developed an open source Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
 
@@ -32,7 +31,7 @@ Clear Data Builder comes with a set of prepared examples that demonstrate the in
 .New CDB Project Wizard
 image::fig_02.png[image]
 
-First of all let's call the new project +episode_1_intro+. CDB supports different ways of linking ExtJS framework to the application. In my case, I already have installed ExtJS libraries under my Web server (Apache Tomcat). We're going to use this local ExtJS URL, but you can just specify any folder in your machine and CDB will copy the ExtJS file inside your project. Lastly, you can use ExtJS from the Sencha's CDN, if you don't want to store these libraries inside your project. Besides, using a common CDN will allow Web browser to reuse the cached version of ExtJS. 
+First of all let's call the new project +episode_1_intro+. CDB supports different ways of linking the ExtJS framework to the application. In my case, I already have installed ExtJS libraries under my Web server (Apache Tomcat). We're going to use this local ExtJS URL, but you can just specify any folder in your machine and CDB will copy the ExtJS file inside your project. Lastly, you can use ExtJS from the Sencha's CDN, if you don't want to store these libraries inside your project. Besides, using a common CDN will allow Web browser to reuse the cached version of ExtJS. 
 
 For this project we are not going to use any server-side (like MyBatis or Hibernate). Just click the button Finish. First of all, CDB will print some initial messages on the Eclipse console. When CDB runs for the first time it initializes directory structure in the +WebContent+ folder. Inside the WebContent directory CDB creates directory structure which is recommended by Sencha for MVC applications. Also you'll get the HTML wrapper - +index.html+ - for this application, which contains the link to the entry point of our application. 
 
@@ -79,22 +78,17 @@ include::Person.java[]
 
 Now I need to annotate the `id` field with the CDB annotation `@JSGeneratedId`. With this annotation I'll instruct CDB to threat this field as auto generated id. Let's examine the directory of ExtJS MVC application and lets take a look inside the model folder. Inside the model folder (the JavaScript section) we have the folder dto which corresponds to the Java +dto+ package where the class +Person.java+ resides. 
 
-<vik>
-
 [[FIG-5]]
 .Generated from Java class ExtJS model
 image::fig_05.png[image]
 
-As you can see Clear Data Builder generated two files. CDB uses the  http://martinfowler.com/dslCatalog/generationGap.html[Generation Gap pattern], which is about keeping the generated and handwritten parts separate by putting them in different classes linked by inheritance. Let's open the person model. In our case the +Person.js+ is extended from the generated +_Person.js+. Should we need to customize this class, we'll do it inside the +Person.js+, but this underscore-prefixed file will be regenerated each and every time when we change something in our model. <vik> CDB follows this pattern for all generated artifacts - java services, ExtJS modes and stores. </vik>
+As you can see Clear Data Builder generated two files as recommended by the http://martinfowler.com/dslCatalog/generationGap.html[Generation Gap pattern], which is about keeping the generated and handwritten parts separate by putting them in different classes linked by inheritance. Let's open the person model. In our case the +Person.js+ is extended from the generated +_Person.js+. Should we need to customize this class, we'll do it inside the +Person.js+, but this underscore-prefixed file will be regenerated each and every time when we change something in our model. CDB follows this pattern for all generated artifacts - Java services, ExtJS models and stores. This model contains all the fields from our Person DTO. 
 
-As you can see here this model contains all the fields from our Person dto. 
+Now we need to create a Java service to populate the ExtJS store with the data. Let's create an interface `PersonService` in the package `service`. This service will to return the list of persons. This interface contains one method -`List<Person> getPersons()`. 
 
-Now we need to create the Java service to populate the ExtJS store with the data. Let's create interface in the package `service` with the name `PersonService`. 
+I need to ask CDB to expose this service as a remote object, which is done by the annotation called `@JSService`.  Another annotation `@JSGenetareStore` will instruct CDB to generate the store. In this case CDB will create the _destination-aware store_. This means that store will know from where to populate its content. All configurations of the store's proxies will be handled by the code generator. With `@JSFillMethod` annotation we will identify our main read method (remember the "R" from CRUD).
 
-For example purposes, my service need to return list on persons. This interface contains one method -`List<Person> getPersons()`. 
-
-I need to tell CDB that I would like to expose this service as the remote object. For this I use the annotation called `@JSService`. Also I need to tell to CDB that I would like to generate store. For this I'll use annotation `@JSGenetareStore`. In this case CDB will create "destination-aware store". This means that store will know from where to populate it's content. All configuration of store's proxies will be handled by code generator. With `@JSFillMethod` annotation we will indicate out main read method (remember R from CRUD). 
-Also it would be nice to have some sort of UI to test how this service is working.  For this I will use annotation called `@JSGenerateSample`. At this point, Clear Data Builder will examine this file, will find this annotations and will generate ExtJS MVC artifacts (models, views, controller) with Sample application. 
+Also it would be nice to have some sort of UI to test the service - the annotation `@JSGenerateSample` will help here. CDB will examine the interface `PersonService`, and based on these annotations will generate all ExtJS MVC artifacts (models, views, controller) with the sample application. 
 
 [[LISTING-2]]
 [source,java]
@@ -108,40 +102,40 @@ public interface PersonService {
 }
 ----------------------------------------------------------------------
 
-After CDB done with code generation we got the implementation for my service - `PersonServiceImpl`. Let's check our +store+ folder inside application folder (+WebContent\app+). We got this store which is bind to +Person+ model. And my person model was generated previously. In this case  Clear Data Builder generated store that binds to the remote service. 
+When the code generation is complete, you'll get the implementation for the service - `PersonServiceImpl`. The +store+ folder inside the application folder (+WebContent\app+) has the store, which is bound to the  +Person+ model. And my person model was generated previously. In this case  Clear Data Builder generated store that binds to the remote service. 
 
-All this intermediate translation from the JavaScript to Java and from Java to JavaScript done by DirectJNgine. This is the server side implementation of Ext Direct Protocol. You will find links and can read about this protocol in http://www.sencha.com/products/extjs/extdirect[official documentation]. 
-Here is a cool thing - Clear Data Builder generates UI for us!  Let's check +samples+ directory <<FIG-06>>
+All this intermediate translation from the JavaScript to Java and from Java to JavaScript done by DirectJNgine, which is the server side implementation of the Ext Direct Protocol. You can read about this protocol in http://www.sencha.com/products/extjs/extdirect[Ext JS documentation]. 
+
+There is one more thing not to be missed - Clear Data Builder generated a UI for us!  Check out the +samples+ directory shown on <<FIG-06>>.
 
 [[FIG-6]]
 .Folder with generated samples
 image::fig_06.png[image]
 
-We can found +SampleController+ and +SampleGrid+ panel inside the samples folder. And Clear Data Builder also generates application entry - +sampleApp.js+. To test this we need just copy +SampleController.js+ in +controller+ folder, +SampleGrid.js+ panel in the +view+ folder, and sample application in the root of our +WebContent+ folder. We need change application entry point with sampleApp.
-This is our sample application <<FIG-7>>
+You can see the +SampleController+ and +SampleGrid+ panel inside the samples folder. CDB also generates the JavaScript application entry point - +sampleApp.js+. To test this application just copy the file  +SampleController.js+ into the +controller+ folder, +SampleGrid.js+ panel into the +view+ folder, and the sample application in the root of our +WebContent+ folder. We need to change the application entry point with sampleApp. This is how the generated UI of the sample application looks like <<FIG-7>>
 
 [[FIG-7]]
 .Scaffolded CRUD application template
 image::fig_07.png[image]
 
-Let's return to our server side code. As I mentioned before, for services CDB also following the _Generation Gap Pattern_ and Clear Data Builder also generated stubs for our service methods. And if we need to _implement_ our CRUD functionality we need to override this methods <<LISTING_3>>. 
+Let's return to the server side code. For services CDB also follows the _Generation Gap Pattern_ and it generated stubs for the service methods. Override these methods when you're ready to implement the CRUD functionality  <<LISTING_3>>. 
 
 [[LISTING_3]]
 [source,java]
 ----------------------------------------------------------------------
 include::2_PersonServiceImpl.java[]
 ----------------------------------------------------------------------
-<1> We need to extend generated method and provide actual implementation.
-<2> `getPerson` is our Read method.
+<1> We need to extend the generated method and provide the actual implementation.
+<2> `getPerson` is our retrieve method (the R in CRUD) .
 <3> I need to generate of in-memory objects. In this case I want to insert in-line data and I would use default constructor with fields to populate data. 
-<4> +fillmethod++`doCreate()` is our create method.
-<5> +fillmethod++`doUpdate` is our update method. 
-<6> +fillmethod++`doDelete` is our delete method.
+<4> +fillmethod++`doCreate()` is our create method (the C in CRUD).
+<5> +fillmethod++`doUpdate` is our update method (the U in CRUD). 
+<6> +fillmethod++`doDelete` is our delete method (the D in CRUD).
 
-When I click +Load+ we get 4 persons from our server side. How to send data back. 
-The Clear Data Builder generates code that you can easily extend. So once you want to add something we can enter data directly into grid. In this case, new instance of PersonModel will be created and added to store. And when I click Sync button changes will be sent to corresponding remote method. Data was processed on the server and Clear Data Builder injects this data in form of `ChangeObject`. It is a class (part of ClearToolkit server side component). When you need to read data that comes from the client side you just need to use `changeObject.getNewVersion()` and this method will return object that you need to deserialize into your actual domain object - Person. After that you can do what ever you want to do it - persist it in database, send over the wire with JMS and etc.
+Click on the +Load+ menu and you'll get 4 persons from our server side code. How to send data back. 
+CDB generates the code that you can easily extend. So once you want to add something we can enter data directly into grid. In this case, new instance of PersonModel will be created and added to store. Click on the Sync menu, and the changes will be sent to corresponding remote method. 
 
-</vik>
+The data was processed on the server and CDB injects this data in the form of the `ChangeObject` instance. When you need to read the data that come from the client side you just need to use `changeObject.getNewVersion()` and this method will return the object that you need to deserialize into the object `Person`. After that you can do what ever you want with `Person` - persist it in database, send it to a Web service et al.
 
 == Part Three: Data Pagination ==
 
@@ -174,7 +168,6 @@ public class PersonServiceImpl extends _PersonServiceImpl {
 
 The Google Chrome Console shows that `PersonStore` was populated with one thousand records. Let's add the pagination component using the Ext `toolbarpaging` component. Let's add it to the file +sampleApp.js+ <<LISTING_5>>. 
 
-<vik>
 
 [[LISTING_5]]
 [source,javascript]
@@ -182,9 +175,9 @@ The Google Chrome Console shows that `PersonStore` was populated with one thousa
 include::sampleApp.js[]
 -----------------------------------------------------
 
-<1> Let's manually instantiate this store. I'll create a separate variable `myStore` for this store and with empty +config+ object. 
-<2> I'll add the +xtype+ `pagingtoolbar` to this component docked items property.  I would like to display the information and dock this element at the top.
-<3> Now paging toolbar now also connected to same store.
+<1> Let's manually instantiate this store - create a separate variable `myStore` for this store and with empty +config+ object. 
+<2> Adding the +xtype+ `pagingtoolbar` to this component docked items property - I'd like to display the information and dock this element at the top.
+<3> Now the paging toolbar is also connected to same store.
 
 Now we need to fix automatically generated controller to control loading of data on 
 click of +Load+ button. 
@@ -195,34 +188,32 @@ click of +Load+ button.
 include::SampleController.js[]
 -----------------------------------------------------
 
-<1> We can get store instance bind to our grid panel. In controller's `refs` property I'm referencing out `simplegrid` panel with `ThePanel` alias.
-<2> In this case I don't need explicitly retrieve store instance by name. Instead, we can use automatically generated by ExtJS framework getter `getPanel()` and `getStore()`.
+<1> We can bind the store instance to our grid panel. In controller's `refs` property I'm referencing our  `simplegrid` panel with `ThePanel` alias.
+<2> In this case I don't need to explicitly retrieve the store instance by name. Instead, we can use getters `getPanel()` and `getStore()` automatically generated by the ExtJS framework.
 
-Right now the pagination doesn't work and each and every time we are receiving one thousand records, because there is no server side is not aware about pagination requirements. Let's fix it <<LISTING-7>> . 
+Right now the pagination doesn't work and we are receiving from the server one thousand records, because the server side is not aware about pagination requirements. Let's fix it <<LISTING-7>> . 
 
-In this case lets go to Network information and we will actually what information has been sent to the server when user clicks on the forward and backward. In this case I need to examine the direct provider URL and see how the request looks like. We see that each and every time when user clicks on the forward or backward this component sends `directOptions`. 
+Open Google Chrome Developer Tools from the menu View -> Developer, refresh the page and go to the Network tab. You'll actually see what information has been sent to the server when user clicked on the button forward and backward. In this case I need to examine the direct provider URL and see how the request looks like. We see that each and every time when user clicks on the forward or backward this component sends `directOptions`. 
 
 [[FIG-8]]
 .Request payload details
 image::fig_08.png[image]
 
-It's the small extension, small plug-in of Clear JS to add this functionality to ExtJS direct store component. At this point, we start using these direct options on the server side to easily get information about page's boundaries. Let's return to `PersonServiceImpl` code and let me put some extra code here. 
+It's the small extension, a small plug-in of Clear JS to add this functionality to ExtJS direct store component. At this point, we start using these direct options on the server side to easily get information about page's boundaries. Let's return to `PersonServiceImpl` code and let me put some extra code here. 
 
 [[LISTING_7]]
 [source,java]
 ----------------------------------------------------------------------
 include::3_PersonServiceImpl.java[]
 ----------------------------------------------------------------------
-<1> On the server side there is a special object available called DirectOptions. And DirectOptions is a part of Clear Toolkit server side components.
-<2> I'm interesting in +start+ and in +limit+ options that we saw on <<FIG-8>> .
-<3> I need to calculate actual limit if the size of our collection is less than page size (`start+limit`) we can assign the size of this collection to the `limit` variable.
-<4> Also we need notify the component about total amount of elements on the server side. For this I can use DirectOptions setOption, total and this is size of our initial data set not the paged.
-<5> And before I'll return the result I need to create subset, actual page of data. In this case I need to use method of list called  Sublist and start from start and from limit. And let assign result and lets see how our application is working. 
+<1> On the server side there is a special object called `DirectOptions`, which is a part of the Clear Toolkit server side components.
+<2> I'm interested in +start+ and in +limit+ options that we saw on <<FIG-8>> .
+<3> I need to calculate the actual limit: if the size of our collection is less than the page size (`start+limit`) we can assign the size of this collection to the `limit` variable.
+<4> Notify the component about the total amount of the elements on the server side. For this I can use `DirectOptions` setOption, total and this is size of our initial data set not the paged.
+<5> Before returning the result, create a subset, an actual page of data. In this case I need to use method of list called  Sublist and start from start and from limit. And let assign the result and run the application. 
 
-As you can see, we loaded only 25 elements on one page. When I click +Next+ or +back+ buttons I get only paged information.
-The Google Chrome Network tab shows that that we are sending +start+ and +limit+ every time and our response contains object with 25 elements.
+As you can see from the Network tab in <<FIG-8>>, we limited the load to 25 elements per page. Clicking on +Next+ or +back+ buttons will get you only a page worth of data. The Google Chrome Developers Tools Network tab shows that that we are sending +start+ and +limit+ every time and our response contains object with 25 elements.
 
-</vik>
 
 If you'd like to repeat all of the above steps on you own watch http://faratasystems.com/training-at-farata-youtube-chanel/[the screencasts] where I perform all the actions described in this article.
 
