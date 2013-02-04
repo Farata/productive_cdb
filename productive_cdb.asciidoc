@@ -5,7 +5,7 @@ Viktor Gamov
 :data-uri:
 :Email:     viktor.gamov@faratasystems.com
 
-It's not likely that you'll start developing an enterprise HTML5 applicationa without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, http://faratasystems.com[Farata Systems], has developed an open source <vik> toolkit called Clear Toolkit for ExtJS. Clear Toolkit includes </vik> Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
+It's not likely that you'll start developing an enterprise HTML5 applications without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, http://faratasystems.com[Farata Systems], has developed an open source <vik> Clear Toolkit for ExtJS. Clear Toolkit includes </vik> Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
 
 == Part One: ExtJS MVC Application Scaffolding ==
 
@@ -18,7 +18,7 @@ In part one I'll cover the following topics:
 <vik>
 Clear Toolkit for ExtJS contains of following parts:
 
-- Clear Data Builder - Eclipse plugin that supports code generation ExtJS MVC artifacts based on Java code.
+- Clear Data Builder - Eclipse plugin that supports code generation ExtJS MVC artifacts based on Java code. CDB comes with wizards to start new project with plain Java or with popular frameworks like Hibernate, Spring, MyBatis.
 - Clear JS - set of JavaScript components that extends ExtJS standard components. E.g. Clear JS contains ChangeObject - a universal way to trace the state changes between old and new versions of the same item in a store. 
 - Clear Runtime - Java components that implements server side part of ChangeObject, DirectOptions and etc.
 
@@ -26,7 +26,7 @@ Clear Toolkit for ExtJS contains of following parts:
 
 To be more productive means to write less code and produce the results faster. This is what CDB is for. In this article you'll see how Clear Data Builder helps you to integrate the client side with the back end using the RPC style and how to implements data pagination for your application.
 
-CDB distribution available as plug-in for Eclipse IDE. The current update site of CDB is located http://cleartoolkit.com/downloads/plugins/extjs/cleardatabuilder/4.1.4/[here].  The current version is 4.1.4 (don't be surprised - this is a five-year old code generator, and its previous versions were made for generating the UI for Adobe Flex framework). You can install this plug-in via +Install New Software+ menu in Eclipse IDE. The <<FIG_1>> shows how you can validate plug-in installation. If you see "Clear Data Builder for EXTJS feature" in the list of Installed Software in your Eclipse IDE, you're good to go.
+CDB distribution available as plug-in for Eclipse IDE. The current update site of CDB is located http://cleartoolkit.com/downloads/plugins/extjs/cleardatabuilder/4.1.4/[here].  The current version is 4.1.4 (don't be surprised - this is a five-year old code generator, and its previous versions were made for generating the UI for Adobe Flex framework). You can install this plug-in via +Install New Software+ menu in Eclipse IDE. The <<FIG-1>> shows how you can validate plug-in installation. If you see "Clear Data Builder for Ext JS feature" in the list of Installed Software in your Eclipse IDE, you're good to go.
 
 IMPORTANT: You have to have "Eclipse for Java EE Developers" installed, which includes the plugins for automation of the Web applications.
 
@@ -76,10 +76,10 @@ Now I would like to show how to use Clear Data Builder to create CRUD applicatio
 * how you can extend it
 * what the `ChangeObject` class is for
 
-I will extend the application from Part 1. For my CRUD application I need a Java POJO.  First, I've created the class +Person.java+ in the package `dto`. Then I've added the fields `firstName`, `lastName`, `address`, `ssn` and `phone` and `id`. Also I need getters and setters for these fields. It's good to have a constructor for the that uses these fields,  and a DTO class should have a `toString()` method. <<LISTING-1>> 
+I will extend the application from Part 1. For my CRUD application I need a Java POJO.  First, I've created the class +Person.java+ in the package `dto`. Then I've added the fields `firstName`, `lastName`, `address`, `ssn` and `phone` and `id`. Also I need getters and setters for these fields. It's good to have a constructor for the that uses these fields,  and a DTO class should have a `toString()` method. <<LISTING_1>> 
 Now I need the same corresponding ExtJS model for my +Person+. Just annotate this class with the CDB annotation called `@JSClass` to ask CDB to generate the ExtJS model. 
 
-[[LISTING-1]]
+[[LISTING_1]]
 .Person data transfer object
 [source,java]
 -----------------------------------------------------
@@ -100,7 +100,7 @@ I need to ask CDB to expose this service as a remote object, which is done by th
 
 Also it would be nice to have some sort of UI to test the service - the annotation `@JSGenerateSample` will help here. CDB will examine the interface `PersonService`, and based on these annotations will generate all ExtJS MVC artifacts (models, views, controller) with the sample application. 
 
-[[LISTING-2]]
+[[LISTING_2]]
 .PersonService interface annotated with CDB annotations
 [source,java]
 ----------------------------------------------------------------------
@@ -206,7 +206,7 @@ public class PersonServiceImpl extends _PersonServiceImpl {
 The Google Chrome Console shows that `PersonStore` was populated with one thousand records. Let's add the pagination component using the Ext `toolbarpaging` component. Let's add it to the file +sampleApp.js+ <<LISTING_5>>. 
 
 [[LISTING_5]]
-.Sample Application entry
+.Sample Application Entry
 [source,javascript]
 -----------------------------------------------------
 include::sampleApp.js[]
@@ -217,7 +217,7 @@ include::sampleApp.js[]
 <3> Now the paging toolbar is also connected to same store.
 
 Now we need to fix automatically generated controller to control loading of data on 
-click of +Load+ button. 
+click of +Load+ button <<LISTING_6>>. 
 
 [[LISTING_6]]
 .Controller for sample application
