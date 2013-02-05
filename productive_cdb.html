@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="generator" content="AsciiDoc 8.6.8, bootstrap-docs backend">
-    <title>Productive Enterprise Web Development with ExtJs and Clear Data Builder</title>
+    <title>Productive Enterprise Web Development with ExtJS and Clear Data Builder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Viktor Gamov">
     <style>
@@ -7792,7 +7792,7 @@ AAAAAAAAgAEAAA==">
     </div>
     <header class="page-header" id="overview">
       <div class="container">
-        <h1>Productive Enterprise Web Development with ExtJs and Clear Data Builder <small>by Viktor Gamov</small></h1>
+        <h1>Productive Enterprise Web Development with ExtJS and Clear Data Builder <small>by Viktor Gamov</small></h1>
       </div>
     </header>
     <div class="container">
@@ -7803,7 +7803,7 @@ AAAAAAAAgAEAAA==">
         </div>
         <div id="content" class="span9">
 <section id="preamble">
-<p>It&#8217;s not likely that you&#8217;ll start developing an enterprise HTML5 applications without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, <a href="http://faratasystems.com">Farata Systems</a>, has developed an open source &lt;vik&gt; Clear Toolkit for ExtJS. Clear Toolkit includes &lt;/vik&gt; Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications.</p>
+<p>It&#8217;s not likely that you&#8217;ll start developing an enterprise HTML5 applications without using one of the JavaScript frameworks. One of the most feature-complete frameworks is <a href="http://www.sencha.com/products/extjs">ExtJS</a> from Sencha, but its learning curve is a bit steep. Our company, <a href="http://faratasystems.com">Farata Systems</a>, has developed an open source software Clear Toolkit for ExtJS. Clear Toolkit includes an Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications.</p>
 </section>
 <section id="part_one_extjs_mvc_application_scaffolding">
   <div class="page-header">
@@ -7812,7 +7812,7 @@ AAAAAAAAgAEAAA==">
 <p>In part one I&#8217;ll cover the following topics:</p>
 <ul>
 <li>
-What is &lt;vik&gt; Clear Toolkit for ExtJS &lt;/vik&gt;
+What is Clear Toolkit for ExtJS
 </li>
 <li>
 How to create ExtJS MVC application for Java-based project
@@ -7821,8 +7821,7 @@ How to create ExtJS MVC application for Java-based project
 How deploy and run your first ExtJS+Java application on Apache Tomcat server
 </li>
 </ul>
-<p>&lt;vik&gt;
-Clear Toolkit for ExtJS contains of following parts:</p>
+<p>Clear Toolkit for ExtJS contains of following parts:</p>
 <ul>
 <li>
 Clear Data Builder - Eclipse plugin that supports code generation ExtJS MVC artifacts based on Java code. CDB comes with wizards to start new project with plain Java or with popular frameworks like Hibernate, Spring, MyBatis.
@@ -7834,8 +7833,7 @@ Clear JS - set of JavaScript components that extends ExtJS standard components. 
 Clear Runtime - Java components that implements server side part of ChangeObject, DirectOptions and etc.
 </li>
 </ul>
-<p>&lt;/vik&gt;</p>
-<p>To be more productive means to write less code and produce the results faster. This is what CDB is for. In this article you&#8217;ll see how Clear Data Builder helps you to integrate the client side with the back end using the RPC style and how to implements data pagination for your application.</p>
+<p>The phrase "to be more productive" means to write less code and produce the results faster. This is what CDB is for. In this article you&#8217;ll see how Clear Data Builder helps you to integrate the client side with the back end using the RPC style and how to implements data pagination for your application.</p>
 <p>CDB distribution available as plug-in for Eclipse IDE. The current update site of CDB is located <a href="http://cleartoolkit.com/downloads/plugins/extjs/cleardatabuilder/4.1.4/">here</a>.  The current version is 4.1.4 (don&#8217;t be surprised - this is a five-year old code generator, and its previous versions were made for generating the UI for Adobe Flex framework). You can install this plug-in via <code>Install New Software</code> menu in Eclipse IDE. The <a href="#FIG-1">[FIG-1]</a> shows how you can validate plug-in installation. If you see "Clear Data Builder for Ext JS feature" in the list of Installed Software in your Eclipse IDE, you&#8217;re good to go.</p>
 <p><span class="label label-important">Important</span> You have to have "Eclipse for Java EE Developers" installed, which includes the plugins for automation of the Web applications.</p>
 <div class="imageblock" id="FIG-1">
@@ -29634,7 +29632,7 @@ Ubg1Y/zrjUwAAABDdEVYdFNvZnR3YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBj
 cmlzdHlAbXlzdGljLmVzLmR1cG9udC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUAODBiYmRhMjcy
 NmRkYWNlOGFiOGEwMWY1OWRlMmViZGII/Q51AAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAA
 SUVORK5CYII="></td><td>
-&lt;vik&gt;For this example application we can use <code>java.util.ArrayList</code> class as in-memory server side storage of <code>Person</code> objects. In real world applications you&#8217;d use database or other persistent storage.&lt;/vik&gt;
+For this sample application we can use <code>java.util.ArrayList</code> class as in-memory server side storage of the <code>Person</code> objects. In real world applications you&#8217;d use a database or other persistent storage.
 </td></tr>
 <tr><td><img alt="4" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABzSURBVHja
 HY0hEoUwEEMjkZVYZGVlr1CJxCKRXKPyy28reyVsZeXKsCFi573ZzAQk+x5jaQ6gFQAxIA8XceEN
@@ -29665,25 +29663,29 @@ fQAAAABJRU5ErkJggg=="></td><td>
 </td></tr>
 </table></div>
 <p>Click on the <code>Load</code> menu and you&#8217;ll get 4 persons from our server.</p>
-<p>&lt;vik&gt;
-Ok, but my reader can ask «How to deal with the rest of CRUD methods - create, update, delete?» Let&#8217;s inserts one new row, modify three existing ones and remove two.
-The <code>Clear.data.DirectStore</code> object will automatically create a collection of six <code>ChangeObjects</code> - one to represent a new row, three to represent the modified ones, and two for the removed rows.</p>
-<p>Click on the Sync menu, and the changes will be sent to corresponding remote method. When you <code>sync()</code> a standard <code>Ext.data.DirectStore</code> ExtJS is POST-ing new, modified and deleted items to the server. When the request is complete the server&#8217;s reply data is applied to the store, expecting that some items can be modified by the server.
-In case of <code>Clear.data.DirectStore</code> instead of passing around items, we pass the delta, wrapped in the <code>ChangeObject</code>.
-Each instance of ChangeOject contains:</p>
+<p>To demonstrate the rest of the CRUD methods we&#8217;ll ask the user to insert one new row, modify three existing ones and remove two rows using the generated Web client. The <code>Clear.data.DirectStore</code> object will automatically create a collection of six `ChangeObject`s - one to represent a new row, three to represent the modified ones, and two for the removed rows.</p>
+<p>When the user clicks on the Sync menu the changes will be sent to the corresponding <code>do...</code> remote method. When you <code>sync()</code> a standard <code>Ext.data.DirectStore</code> ExtJS is POST-ing new, modified and deleted items to the server. When the request is complete the server&#8217;s reply data is applied to the store, expecting that some items can be modified by the server. In case of <code>Clear.data.DirectStore</code> instead of passing around items, we pass the delta, wrapped in the <code>ChangeObject</code>.</p>
+<p>Each instance of the <code>ChangeOject</code> contains the following:</p>
 <ul>
 <li>
-<code>newVersion</code> (or getNewVersion for Java object) of the item if we modify or create new item.
+<code>newVersion</code>  - it&#8217;s an instance of the newly inserted or modified item. On the Java side it&#8217;s available via <code>getNewVersion()</code>.
 </li>
 <li>
-<code>prevVersion</code> (or getPrevVersion fro Java object) of the item if modily or delete item.
+<code>prevVersion</code> - it&#8217;s an instance of the deleted of old version of modified item. On the Java side it&#8217;s available via <code>getPrevVersion()</code>.
 </li>
 <li>
-array of <code>changepropertyNames</code> if this ChangeObject describes update operation.
+array of <code>changepropertyNames</code> if this <code>ChangeObject</code> represents an update operation.
 </li>
 </ul>
-<p>Rest of <code>ChangeObject</code> details described on wiki on github. Link to this could be found in <small>Useful Links</small> section.</p>
-<p>Corresponding Java implementation of <code>ChangeObject</code> also available on the server side. The data was processed on the server and CDB injects <code>ChangeObject</code> instance. Take a look on <code>getPersons_doCreate()</code> method. When you need to read the data that comes from the client side you need to use <code>changeObject.getNewVersion()</code>. This method will return the JSON object that you need to deserialize into the object <code>Person</code>.&lt;/vik&gt;</p>
+<p>The rest of <code>ChangeObject</code> details described on wiki on github (see the link in <small>Useful Links</small> section).</p>
+<p>The corresponding Java implementation of <code>ChangeObject</code> is available on the server side and Clear Toolkit passes <code>ChangeObject</code> instances to the appropriate <code>do*</code> method of the service class. Take a look at the <code>getPersons_doCreate()</code> method from <a href="#LISTING_3">[LISTING_3]</a>. When the server needs to read the data arrived from the client your Java class has to invoke the method <code>changeObject.getNewVersion()</code>. This method will return the JSON object that you need to deserialize into the object <code>Person</code>. This is done in <a href="#LISTING_3">[LISTING_3]</a> and looks like this.</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt> <span style="color: #008080">Person</span> dto <span style="color: #990000">=</span> <span style="color: #990000">(</span>Person<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">deserializeObject</span></span><span style="color: #990000">(</span>
+                <span style="color: #990000">(</span>Map<span style="color: #990000">&lt;</span>String<span style="color: #990000">,</span> String<span style="color: #990000">&gt;)</span> changeObject<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getNewVersion</span></span><span style="color: #990000">(),</span>Person<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #0000FF">class</span></span><span style="color: #990000">);</span></tt></pre></div></div>
 </section>
 <section id="part_three_data_pagination">
   <div class="page-header">
@@ -29744,7 +29746,7 @@ http://www.gnu.org/software/src-highlite -->
 
 Ext<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">syncRequire</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'episode_3_pagination.init.InitDirect'</span><span style="color: #990000">);</span>
 <span style="font-style: italic"><span style="color: #9A1900">// Define GridPanel</span></span>
-<span style="font-weight: bold"><span style="color: #0000FF">var</span></span> myStore <span style="color: #990000">=</span> Ext<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">create</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'episode_3_pagination.store.dto.PersonStore'</span><span style="color: #990000">,</span><span style="color: #FF0000">{}</span><span style="color: #990000">);</span>                      <span style="font-style: italic"><span style="color: #9A1900">//<img alt="1" src="data:image/png;base64,
+<span style="font-weight: bold"><span style="color: #0000FF">var</span></span> myStore <span style="color: #990000">=</span> Ext<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">create</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'episode_3_pagination.store.dto.PersonStore'</span><span style="color: #990000">,</span><span style="color: #FF0000">{}</span><span style="color: #990000">);</span>              <span style="font-style: italic"><span style="color: #9A1900">//<img alt="1" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
 VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
 gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
@@ -29761,7 +29763,7 @@ Ext<span style="color: #990000">.</span><span style="font-weight: bold"><span st
         <span style="color: #FF0000">}</span><span style="color: #990000">],</span>
         dockedItems<span style="color: #990000">:</span> <span style="color: #990000">[</span>
                 <span style="color: #FF0000">{</span>
-                        xtype<span style="color: #990000">:</span> <span style="color: #FF0000">'pagingtoolbar'</span><span style="color: #990000">,</span>                                                                                                 <span style="font-style: italic"><span style="color: #9A1900">//<img alt="2" src="data:image/png;base64,
+                        xtype<span style="color: #990000">:</span> <span style="color: #FF0000">'pagingtoolbar'</span><span style="color: #990000">,</span>         <span style="font-style: italic"><span style="color: #9A1900">//<img alt="2" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB7SURBVHja
 HY6hFcMwDEQ/NDQsNSwU9Apdo7Cw0CsIBoZmhKzQEQJLDQsFVclHpHu693W429Zr7bu541Pg3kCm
 Y0K75u9TEUPhuGgWU4mQDvieEaSQEnsT6zKPeZY0EUNtrHMCXvYUuSUg0PsMjUSvpysUT6OOSil9
@@ -29771,7 +29773,7 @@ MjljOTRhN2Y0N2RlY2NmYWRhMjhhY2I5ZGblb7ENAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30A
 AAAASUVORK5CYII="></span></span>
                         displayInfo<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
                         dock<span style="color: #990000">:</span> <span style="color: #FF0000">'top'</span><span style="color: #990000">,</span>
-                        store<span style="color: #990000">:</span> myStore                                                                                                                  <span style="font-style: italic"><span style="color: #9A1900">//<img alt="3" src="data:image/png;base64,
+                        store<span style="color: #990000">:</span> myStore                  <span style="font-style: italic"><span style="color: #9A1900">//<img alt="3" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB4SURBVHja
 JU6rFcNADBM09BqBhl6ltDCwKxQeDOwKB7tGYGCoYaChK6cmlt7TD1W5uap/sgoVBnEXWBTSoOdx
 7gpLDOAVorWC0ABdcBPqwZtx8Muf+DPXJpQ96Nu/LSMYl/n17oCOnplTOrpiwW3sUs4ZJmob5/wA
@@ -29898,7 +29900,7 @@ AAAASUVORK5CYII="></td><td>
 In this case I don&#8217;t need to explicitly retrieve the store instance by name. Instead, we can use getters <code>getPanel()</code> and <code>getStore()</code> automatically generated by the ExtJS framework.
 </td></tr>
 </table></div>
-<p>&lt;vik&gt; When user clicks the button forward and backward method <code>loadPage</code> of the underlying store is called. In this case, let&#8217;s examine the <code>directprovider</code> URL - server side router of remoting calls - and see how the direct request looks like.  Open Google Chrome Developer Tools from the menu View &#8594; Developer, refresh the page and go to the Network tab. We see that each and every time when user clicks on the forward or backward buttons of pagination toolbar component sends <code>directOptions</code> as part of request. &lt;/vik&gt;</p>
+<p>When the user clicks the button <small>next</small> or <small>previous</small> the method <code>loadPage</code> of the underlying store is called. Let&#8217;s examine the <code>directprovider</code> URL - server side router of remoting calls - and see how the direct request looks like.  Open Google Chrome Developer Tools from the menu View &#8594; Developer, refresh the Web page and go to the Network tab. You&#8217;ll that each time the user clicks on the <small>next</small> or <small>previous</small> buttons on the pagination toolbar the component sends <code>directOptions</code> as a part of the request.</p>
 <div class="imageblock" id="FIG-9">
 <div class="content">
 <img alt="image" src="data:image/png;base64,
@@ -34821,9 +34823,7 @@ AREQAREQAREQAREQAREQAREQAREQAREQAREQARFoegL/D+GkWDBp8QO2AAAAAElFTkSuQmCC">
 </div>
 <div class="title">Figure 9. Request payload details</div>
 </div>
-<p>&lt;vik&gt;Clear JS - client side extension of the ExtJS framework - adds extra functionality to <code>Ext.data.DirectStore</code> component to provide the hint to server side. At this point, these direct options can be extracted on the server side to easily get information about page&#8217;s boundaries.&lt;/vik&gt; Let&#8217;s return to <code>PersonServiceImpl</code> code and let me put some extra code here.
-&lt;vik&gt;
-Right now the pagination doesn&#8217;t work and we are receiving from the server one thousand records, because the server side is not aware about pagination requirements. We&#8217;ll fix it in <a href="#LISTING_7">[LISTING_7]</a>. &lt;/vik&gt;</p>
+<p>Default Ext Direct request doesn&#8217;t carry any information about page size. Clear JS, the client side extension of the ExtJS framework, adds some extra functionality to <code>Ext.data.DirectStore</code> component to pass the page <code>start</code> and <code>limit</code> values to the server side. At this point, the <code>directOptions</code> request property shown in <a href="#FIG-9">[FIG-9]</a> can be extracted on the server side to get the information about the page&#8217;s boundaries. Let&#8217;s return to the code of <code>PersonServiceImpl</code> and add some extra code there. Right now the pagination doesn&#8217;t work. The server sends the entire thousand records, because the server is not aware that the data has to be paginated. We&#8217;ll fix it in <a href="#LISTING_7">[LISTING_7]</a>.</p>
 <div class="listingblock">
 <a id="LISTING_7"></a>
 <div class="title">Implementation of PersonService with pagination</div>
@@ -34899,7 +34899,7 @@ gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
 YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
 dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
 ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII="></td><td>
-On the server side there is a special object called <code>DirectOptions</code>, which is a part of the Clear Toolkit server side components.
+On the server side there is a special object called <code>DirectOptions</code>, which comes with Clear Toolkit.
 </td></tr>
 <tr><td><img alt="2" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB7SURBVHja
 HY6hFcMwDEQ/NDQsNSwU9Apdo7Cw0CsIBoZmhKzQEQJLDQsFVclHpHu693W429Zr7bu541Pg3kCm
@@ -34908,7 +34908,7 @@ izp/VNk1YJ8vf6MAAABDdEVYdFNvZnR3YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8w
 MSBjcmlzdHlAbXlzdGljLmVzLmR1cG9udC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUAODBlYWU1
 MjljOTRhN2Y0N2RlY2NmYWRhMjhhY2I5ZGblb7ENAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30A
 AAAASUVORK5CYII="></td><td>
-I&#8217;m interested in <code>start</code> and in <code>limit</code> options that we saw on <a href="#FIG-9">[FIG-9]</a> .
+We&#8217;re interested in <code>start</code> and in <code>limit</code> options (see <a href="#FIG-9">[FIG-9]</a>).
 </td></tr>
 <tr><td><img alt="3" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB4SURBVHja
 JU6rFcNADBM09BqBhl6ltDCwKxQeDOwKB7tGYGCoYaChK6cmlt7TD1W5uap/sgoVBnEXWBTSoOdx
@@ -34917,7 +34917,7 @@ Ubg1Y/zrjUwAAABDdEVYdFNvZnR3YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBj
 cmlzdHlAbXlzdGljLmVzLmR1cG9udC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUAODBiYmRhMjcy
 NmRkYWNlOGFiOGEwMWY1OWRlMmViZGII/Q51AAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAA
 SUVORK5CYII="></td><td>
-I need to calculate the actual limit: if the size of our collection is less than the page size (<code>start+limit</code>) we can assign the size of this collection to the <code>limit</code> variable.
+Calculate the actual limit. Assign the size of the data collection to the <code>limit</code> variable if it&#8217;s  less than the page size (<code>start+limit</code>).
 </td></tr>
 <tr><td><img alt="4" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABzSURBVHja
 HY0hEoUwEEMjkZVYZGVlr1CJxCKRXKPyy28reyVsZeXKsCFi573ZzAQk+x5jaQ6gFQAxIA8XceEN
@@ -34926,7 +34926,7 @@ ZEN3DkOCH/TobUoSVuAYwSSLyzbvaHWVFJxUmmp+PF+twrLkuXzLwPmZ8+OjtH8KS6pGvuoGNo5b
 QG15c3RpYy5lcy5kdXBvbnQuY29tkbohuAAAACp0RVh0U2lnbmF0dXJlADlmODJmY2FjOWUwMzlj
 YmRiNzIzODBhNDU5MTMyNGY1gLv4dgAAAA50RVh0UGFnZQAxMngxMiswKzCEbbt9AAAAAElFTkSu
 QmCC"></td><td>
-Notify the component about the total amount of the elements on the server side. For this I can use &lt;vik&gt; <code>DirectOptions.setOption()</code> method with <code>total</code> option. &lt;/vik&gt;
+Notify the component about the total number of elements on the server side by using <code>DirectOptions.setOption()</code> method with <code>total</code> option.
 </td></tr>
 <tr><td><img alt="5" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB2SURBVHja
 FY6hEcQwDAQPChqGGhoaqgWX8PUYBhqGBn4rX0JooKDh/UlsZ3b2BJKXH8XPTYLh1lpt1h+BwxkR
@@ -34935,19 +34935,14 @@ Ny9CX3/7AAAAQ3RFWHRTb2Z0d2FyZQBAKCMpSW1hZ2VNYWdpY2sgNC4yLjggOTkvMDgvMDEgY3Jp
 c3R5QG15c3RpYy5lcy5kdXBvbnQuY29tkbohuAAAACp0RVh0U2lnbmF0dXJlAGZlNjkwNDYzMzc5
 ZWIyNWU1NjJmY2M4Y2M5YjNjN2Uw37I5ngAAAA50RVh0UGFnZQAxMngxMiswKzCEbbt9AAAAAElF
 TkSuQmCC"></td><td>
-Before returning the result, create a subset, an actual page of data. In this case I need to use method of &lt;vik&gt; <code>java.util.List.sublist()</code> which produces a view of the portion of this list between indexes specified by start and limit parameters.  &lt;/vik&gt;
+Before returning the result, create a subset, an actual page of data. In this case I need to use method of  <code>java.util.List.sublist()</code> which produces the view of the portion of this list between indexes specified by the <code>start</code> and the <code>limit</code> parameters.
 </td></tr>
 </table></div>
-<p>As you can see from the Network tab in <a href="#FIG-8">[FIG-8]</a>, we limited the load to 25 elements per page. Clicking on <code>Next</code> or <code>back</code> buttons will get you only a page worth of data. The Google Chrome Developers Tools Network tab shows that that we are sending <code>start</code> and <code>limit</code> every time and our response contains object with 25 elements.</p>
-<p>If you&#8217;d like to repeat all of the above steps on you own watch <a href="http://faratasystems.com/training-at-farata-youtube-chanel/">the screencasts</a> where I perform all the actions described in this article.</p>
-<p>&lt;vik&gt;</p>
+<p>As you can see from the Network tab in <a href="#FIG-8">[FIG-8]</a>, we limited the data load to 25 elements per page. Clicking on <code>next</code> or <code>previous</code> buttons will get you only a page worth of data. The Google Chrome Developers Tools Network tab shows that that we are sending <code>start</code> and <code>limit</code> every time and our response contains object with 25 elements.</p>
+<p>If you&#8217;d like to repeat all of the above steps on you own, watch <a href="http://faratasystems.com/training-at-farata-youtube-chanel/">the screencasts</a> where I perform all the actions described in this article.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>As you can see, development of enterprise web application involves many steps that need to be done by developer. But with right set of tools repetitive steps could be and automated. Remember, don&#8217;t repeat yourself! Try to do more with less effort!
-I hope, you will find this article useful and helpful to start with Clear Data Builder which can tremendously improve your developer&#8217;s workflow.</p>
-<p>Also you can subscribe to our <a href="http://youtube.com/trainingAtFarata">youtube channel</a> to get access to latest videos, screencasts and learning materials.</p>
-<p>Cheers,
-Vik</p>
-<p>&lt;/vik&gt;</p>
+<p>The development of enterprise web application involves many steps that need to be done by developer. But with the right set of tools the repetitive steps can be automated. Remember the DRY principle - don&#8217;t repeat yourself. Try to do more with less efforts. I hope this article will help your to get started start with Clear Data Builder, which should make any ExtJS enterprise software developer more productive.</p>
+<p>Subscribe to our <a href="http://youtube.com/trainingAtFarata">youtube channel</a> to get access to the latest videos, screencasts and learning materials. You are invited to read our upcoming book <a href="http://enterprisewebbook.com/">"Enterprise Web Development"</a> (work in progress) that include coverage of ExtJS.</p>
 <h2 id="additional_useful_links">Additional Useful Links</h2>
 <ul>
 <li>

@@ -1,8 +1,7 @@
-= Productive Enterprise Web Development with ExtJs and Clear Data Builder = 
+= Productive Enterprise Web Development with ExtJS and Clear Data Builder = 
 Viktor Gamov
-2013-01-30
+2013-02-05
 :icons:
-:data-uri:
 :Email:     viktor.gamov@faratasystems.com
 
 It's not likely that you'll start developing an enterprise HTML5 applications without using one of the JavaScript frameworks. One of the most feature-complete frameworks is http://www.sencha.com/products/extjs[ExtJS] from Sencha, but its learning curve is a bit steep. Our company, http://faratasystems.com[Farata Systems], has developed an open source software Clear Toolkit for ExtJS. Clear Toolkit includes an Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
@@ -156,7 +155,7 @@ include::2_PersonServiceImpl.java[]
 
 Click on the +Load+ menu and you'll get 4 persons from our server. 
 
-To demonstrate the rest of the CRUD methods we'll ask the user to insert one new row, modify three existing ones and remove two rows using the generated Web client. The `Clear.data.DirectStore` object will automatically create a collection of six `ChangeObjects` - one to represent a new row, three to represent the modified ones, and two for the removed rows.
+To demonstrate the rest of the CRUD methods we'll ask the user to insert one new row, modify three existing ones and remove two rows using the generated Web client. The `Clear.data.DirectStore` object will automatically create a collection of six `ChangeObject`s - one to represent a new row, three to represent the modified ones, and two for the removed rows.
 
 When the user clicks on the Sync menu the changes will be sent to the corresponding `do...` remote method. When you `sync()` a standard `Ext.data.DirectStore` ExtJS is POST-ing new, modified and deleted items to the server. When the request is complete the server's reply data is applied to the store, expecting that some items can be modified by the server. In case of `Clear.data.DirectStore` instead of passing around items, we pass the delta, wrapped in the `ChangeObject`.
 
@@ -168,7 +167,14 @@ Each instance of the `ChangeOject` contains the following:
 
 The rest of `ChangeObject` details described on wiki on github (see the link in _Useful Links_ section).
 
-The corresponding Java implementation of `ChangeObject` is available on the server side and Clear Toolkit passes `ChangeObject` instances to the corresponding `do*` methods of service. Take a look at the `getPersons_doCreate()` method. When the server needs to read the data arrived from the client you need to invoke `changeObject.getNewVersion()`. This method will return the JSON object that you need to deserialize into the object `Person`.
+The corresponding Java implementation of `ChangeObject` is available on the server side and Clear Toolkit passes `ChangeObject` instances to the appropriate `do*` method of the service class. Take a look at the `getPersons_doCreate()` method from <<LISTING_3>>. When the server needs to read the data arrived from the client your Java class has to invoke the method `changeObject.getNewVersion()`. This method will return the JSON object that you need to deserialize into the object `Person`. This is done in <<LISTING_3>> and looks like this.
+
+[source,java]
+----------------------------------------------------------------------
+ Person dto = (Person) deserializeObject(
+                (Map<String, String>) changeObject.getNewVersion(),Person.class);
+----------------------------------------------------------------------
+
 
 == Part Three: Data Pagination ==
 
@@ -232,7 +238,7 @@ When the user clicks the button _next_ or _previous_ the method `loadPage` of th
 .Request payload details
 image::fig_09.png[image]
 
-Default Ext Direct request doesn't carry any information about page size. Clear JS, the client side extension of the ExtJS framework, adds some extra functionality to +Ext.data.DirectStore+ component to pass page +start+ and +limit+ properties to the server side. At this point, these `directOptions` request property showed in <<FIG-9>> can be extracted on the server side to get the information about the page's boundaries. Let's return to the code of `PersonServiceImpl` and add some extra code there. Right now the pagination doesn't work and the server sends one thousand records, because the server is not aware that the data has to be paginated. We'll fix it in <<LISTING_7>>. 
+Default Ext Direct request doesn't carry any information about page size. Clear JS, the client side extension of the ExtJS framework, adds some extra functionality to +Ext.data.DirectStore+ component to pass the page +start+ and +limit+ values to the server side. At this point, the `directOptions` request property shown in <<FIG-9>> can be extracted on the server side to get the information about the page's boundaries. Let's return to the code of `PersonServiceImpl` and add some extra code there. Right now the pagination doesn't work. The server sends the entire thousand records, because the server is not aware that the data has to be paginated. We'll fix it in <<LISTING_7>>. 
 
 [[LISTING_7]]
 .Implementation of PersonService with pagination
