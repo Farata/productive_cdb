@@ -5,26 +5,25 @@ Viktor Gamov
 :data-uri:
 :Email:     viktor.gamov@faratasystems.com
 
-It's not likely that you'll start developing an enterprise HTML5 applications without using one of the JavaScript frameworks. One of the most feature complete frameworks is ExtJS from Sencha, but its learning curve is a bit steep. Our company, http://faratasystems.com[Farata Systems], has developed an open source <vik> Clear Toolkit for ExtJS. Clear Toolkit includes </vik> Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
+It's not likely that you'll start developing an enterprise HTML5 applications without using one of the JavaScript frameworks. One of the most feature-complete frameworks is http://www.sencha.com/products/extjs[ExtJS] from Sencha, but its learning curve is a bit steep. Our company, http://faratasystems.com[Farata Systems], has developed an open source software Clear Toolkit for ExtJS. Clear Toolkit includes an Eclipse plugin called Clear Data Builder (CDB). This is a productivity tool - a code generator - that can create a CRUD application for you in no time. This application will have HTML/JavaScript/ExtJS client and Java-based server. In this article you will learn how jump start development of such Web applications. 
 
 == Part One: ExtJS MVC Application Scaffolding ==
 
 In part one I'll cover the following topics:
 
-- What is <vik> Clear Toolkit for ExtJS </vik>
+- What is Clear Toolkit for ExtJS 
 - How to create ExtJS MVC application for Java-based project
 - How deploy and run your first ExtJS+Java application on Apache Tomcat server
 
-<vik>
+
 Clear Toolkit for ExtJS contains of following parts:
 
 - Clear Data Builder - Eclipse plugin that supports code generation ExtJS MVC artifacts based on Java code. CDB comes with wizards to start new project with plain Java or with popular frameworks like Hibernate, Spring, MyBatis.
 - Clear JS - set of JavaScript components that extends ExtJS standard components. E.g. Clear JS contains ChangeObject - a universal way to trace the state changes between old and new versions of the same item in a store. 
 - Clear Runtime - Java components that implements server side part of ChangeObject, DirectOptions and etc.
 
-</vik>
 
-To be more productive means to write less code and produce the results faster. This is what CDB is for. In this article you'll see how Clear Data Builder helps you to integrate the client side with the back end using the RPC style and how to implements data pagination for your application.
+The phrase "to be more productive" means to write less code and produce the results faster. This is what CDB is for. In this article you'll see how Clear Data Builder helps you to integrate the client side with the back end using the RPC style and how to implements data pagination for your application.
 
 CDB distribution available as plug-in for Eclipse IDE. The current update site of CDB is located http://cleartoolkit.com/downloads/plugins/extjs/cleardatabuilder/4.1.4/[here].  The current version is 4.1.4 (don't be surprised - this is a five-year old code generator, and its previous versions were made for generating the UI for Adobe Flex framework). You can install this plug-in via +Install New Software+ menu in Eclipse IDE. The <<FIG-1>> shows how you can validate plug-in installation. If you see "Clear Data Builder for Ext JS feature" in the list of Installed Software in your Eclipse IDE, you're good to go.
 
@@ -150,28 +149,26 @@ include::2_PersonServiceImpl.java[]
 ----------------------------------------------------------------------
 <1> We need to extend the generated method and provide the actual implementation.
 <2> `getPerson` is our retrieve method (the R in CRUD) .
-<3> <vik>For this example application we can use +java.util.ArrayList+ class as in-memory server side storage of `Person` objects. In real world applications you'd use database or other persistent storage.</vik> 
+<3> For this sample application we can use +java.util.ArrayList+ class as in-memory server side storage of the `Person` objects. In real world applications you'd use a database or other persistent storage. 
 <4> +fillmethod++`doCreate()` is our create method (the C in CRUD).
 <5> +fillmethod++`doUpdate` is our update method (the U in CRUD). 
 <6> +fillmethod++`doDelete` is our delete method (the D in CRUD).
 
 Click on the +Load+ menu and you'll get 4 persons from our server. 
 
-<vik>
-Ok, but my reader can ask «How to deal with the rest of CRUD methods - create, update, delete?» Let's inserts one new row, modify three existing ones and remove two.
-The `Clear.data.DirectStore` object will automatically create a collection of six `ChangeObjects` - one to represent a new row, three to represent the modified ones, and two for the removed rows.
+To demonstrate the rest of the CRUD methods we'll ask the user to insert one new row, modify three existing ones and remove two rows using the generated Web client. The `Clear.data.DirectStore` object will automatically create a collection of six `ChangeObjects` - one to represent a new row, three to represent the modified ones, and two for the removed rows.
 
-Click on the Sync menu, and the changes will be sent to corresponding remote method. When you `sync()` a standard `Ext.data.DirectStore` ExtJS is POST-ing new, modified and deleted items to the server. When the request is complete the server's reply data is applied to the store, expecting that some items can be modified by the server. 
-In case of `Clear.data.DirectStore` instead of passing around items, we pass the delta, wrapped in the `ChangeObject`.
-Each instance of ChangeOject contains:
+When the user clicks on the Sync menu the changes will be sent to the corresponding `do...` remote method. When you `sync()` a standard `Ext.data.DirectStore` ExtJS is POST-ing new, modified and deleted items to the server. When the request is complete the server's reply data is applied to the store, expecting that some items can be modified by the server. In case of `Clear.data.DirectStore` instead of passing around items, we pass the delta, wrapped in the `ChangeObject`.
 
-- `newVersion` (or getNewVersion for Java object) of the item if we modify or create new item.
-- `prevVersion` (or getPrevVersion fro Java object) of the item if modily or delete item.
-- array of `changepropertyNames` if this ChangeObject describes update operation.
+Each instance of the `ChangeOject` contains the following:
 
-Rest of `ChangeObject` details described on wiki on github. Link to this could be found in _Useful Links_ section.
+- `newVersion`  - it's an instance of the newly inserted or modified item. On the Java side it's available via `getNewVersion()`.
+- `prevVersion` - it's an instance of the deleted of old version of modified item. On the Java side it's available via `getPrevVersion()`.
+- array of `changepropertyNames` if this `ChangeObject` represents an update operation.
 
-Corresponding Java implementation of `ChangeObject` also available on the server side. The data was processed on the server and CDB injects `ChangeObject` instance. Take a look on `getPersons_doCreate()` method. When you need to read the data that comes from the client side you need to use `changeObject.getNewVersion()`. This method will return the JSON object that you need to deserialize into the object `Person`.</vik>
+The rest of `ChangeObject` details described on wiki on github (see the link in _Useful Links_ section).
+
+The corresponding Java implementation of `ChangeObject` is available on the server side and Clear Toolkit passes `ChangeObject` instances to the corresponding `do*` methods of service. Take a look at the `getPersons_doCreate()` method. When the server needs to read the data arrived from the client you need to invoke `changeObject.getNewVersion()`. This method will return the JSON object that you need to deserialize into the object `Person`.
 
 == Part Three: Data Pagination ==
 
@@ -229,15 +226,13 @@ include::SampleController.js[]
 <1> We can bind the store instance to our grid panel. In controller's `refs` property I'm referencing our  `simplegrid` panel with `ThePanel` alias.
 <2> In this case I don't need to explicitly retrieve the store instance by name. Instead, we can use getters `getPanel()` and `getStore()` automatically generated by the ExtJS framework.
 
-<vik> When user clicks the button forward and backward method `loadPage` of the underlying store is called. In this case, let's examine the `directprovider` URL - server side router of remoting calls - and see how the direct request looks like.  Open Google Chrome Developer Tools from the menu View -> Developer, refresh the page and go to the Network tab. We see that each and every time when user clicks on the forward or backward buttons of pagination toolbar component sends `directOptions` as part of request. </vik>
+When the user clicks the button _next_ or _previous_ the method `loadPage` of the underlying store is called. Let's examine the `directprovider` URL - server side router of remoting calls - and see how the direct request looks like.  Open Google Chrome Developer Tools from the menu View -> Developer, refresh the Web page and go to the Network tab. You'll that each time the user clicks on the _next_ or _previous_ buttons on the pagination toolbar the component sends `directOptions` as a part of the request. 
 
 [[FIG-9]]
 .Request payload details
 image::fig_09.png[image]
 
-<vik>Clear JS - client side extension of the ExtJS framework - adds extra functionality to +Ext.data.DirectStore+ component to provide the hint to server side. At this point, these direct options can be extracted on the server side to easily get information about page's boundaries.</vik> Let's return to `PersonServiceImpl` code and let me put some extra code here.
-<vik>
-Right now the pagination doesn't work and we are receiving from the server one thousand records, because the server side is not aware about pagination requirements. We'll fix it in <<LISTING_7>>. </vik>
+Default Ext Direct request doesn't carry any information about page size. Clear JS, the client side extension of the ExtJS framework, adds some extra functionality to +Ext.data.DirectStore+ component to pass page +start+ and +limit+ properties to the server side. At this point, these `directOptions` request property showed in <<FIG-9>> can be extracted on the server side to get the information about the page's boundaries. Let's return to the code of `PersonServiceImpl` and add some extra code there. Right now the pagination doesn't work and the server sends one thousand records, because the server is not aware that the data has to be paginated. We'll fix it in <<LISTING_7>>. 
 
 [[LISTING_7]]
 .Implementation of PersonService with pagination
@@ -245,29 +240,23 @@ Right now the pagination doesn't work and we are receiving from the server one t
 ----------------------------------------------------------------------
 include::3_PersonServiceImpl.java[]
 ----------------------------------------------------------------------
-<1> On the server side there is a special object called `DirectOptions`, which is a part of the Clear Toolkit server side components.
-<2> I'm interested in +start+ and in +limit+ options that we saw on <<FIG-9>> .
-<3> I need to calculate the actual limit: if the size of our collection is less than the page size (`start+limit`) we can assign the size of this collection to the `limit` variable.
-<4> Notify the component about the total amount of the elements on the server side. For this I can use <vik> `DirectOptions.setOption()` method with +total+ option. </vik>
-<5> Before returning the result, create a subset, an actual page of data. In this case I need to use method of <vik> +java.util.List.sublist()+ which produces a view of the portion of this list between indexes specified by start and limit parameters.  </vik>
+<1> On the server side there is a special object called `DirectOptions`, which comes with Clear Toolkit.
+<2> We're interested in +start+ and in +limit+ options (see <<FIG-9>>).
+<3> Calculate the actual limit. Assign the size of the data collection to the `limit` variable if it's  less than the page size (`start+limit`).
+<4> Notify the component about the total number of elements on the server side by using `DirectOptions.setOption()` method with +total+ option. 
+<5> Before returning the result, create a subset, an actual page of data. In this case I need to use method of  +java.util.List.sublist()+ which produces the view of the portion of this list between indexes specified by the `start` and the `limit` parameters.  
 
-As you can see from the Network tab in <<FIG-8>>, we limited the load to 25 elements per page. Clicking on +Next+ or +back+ buttons will get you only a page worth of data. The Google Chrome Developers Tools Network tab shows that that we are sending +start+ and +limit+ every time and our response contains object with 25 elements.
+As you can see from the Network tab in <<FIG-8>>, we limited the data load to 25 elements per page. Clicking on +next+ or +previous+ buttons will get you only a page worth of data. The Google Chrome Developers Tools Network tab shows that that we are sending +start+ and +limit+ every time and our response contains object with 25 elements.
 
-If you'd like to repeat all of the above steps on you own watch http://faratasystems.com/training-at-farata-youtube-chanel/[the screencasts] where I perform all the actions described in this article.
+If you'd like to repeat all of the above steps on you own, watch http://faratasystems.com/training-at-farata-youtube-chanel/[the screencasts] where I perform all the actions described in this article.
 
-<vik>
 
 === Conclusion ===
 
-As you can see, development of enterprise web application involves many steps that need to be done by developer. But with right set of tools repetitive steps could be and automated. Remember, don't repeat yourself! Try to do more with less effort!
-I hope, you will find this article useful and helpful to start with Clear Data Builder which can tremendously improve your developer's workflow.
+The development of enterprise web application involves many steps that need to be done by developer. But with the right set of tools the repetitive steps can be automated. Remember the DRY principle - don't repeat yourself. Try to do more with less efforts. I hope this article will help your to get started start with Clear Data Builder, which should make any ExtJS enterprise software developer more productive.
 
-Also you can subscribe to our http://youtube.com/trainingAtFarata[youtube channel] to get access to latest videos, screencasts and learning materials.
+Subscribe to our http://youtube.com/trainingAtFarata[youtube channel] to get access to the latest videos, screencasts and learning materials. You are invited to read our upcoming book http://enterprisewebbook.com/["Enterprise Web Development"] (work in progress) that include coverage of ExtJS.
 
-Cheers,
-Vik
-
-</vik>
 
 === Additional Useful Links ===
 
