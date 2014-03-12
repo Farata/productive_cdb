@@ -6,7 +6,7 @@ Ext.Loader.setConfig({
 		Clear : 'clear'
 	}
 });
-
+//--
 Ext.syncRequire('episode_3_pagination.init.InitDirect');
 // Define GridPanel
 var myStore = Ext.create('episode_3_pagination.store.dto.PersonStore',{});		//<1>
